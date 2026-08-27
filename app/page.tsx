@@ -1,61 +1,127 @@
 import Link from 'next/link';
-import { ArchitectureFlow, MetricGrid, MissionHeader, PageCTA, Section } from './components/mission-control';
+import { ArchitectureFlow, PageCTA } from './components/mission-control';
 
 export default function HomePage(){
-  return <main>
-    <MissionHeader
-      eyebrow="Cairn Continuity Systems / R&D"
-      title={<>Persistent intelligence needs a persistent foundation.</>}
-      description={<>Cairn Continuum is developing model-independent continuity infrastructure for long-lived AI systems — preserving authoritative history, provenance, checkpoints, commitments and recoverable state as models, hardware, providers and environments change.</>}
-      actions={<><Link className="button primary" href="/technology">Explore technology</Link><Link className="button" href="/why-continuity">Why continuity?</Link></>}
-      telemetry={[
-        <><strong>HISTORY</strong> · APPEND-ONLY</>,
-        <><strong>MODEL LAYER</strong> · REPLACEABLE</>,
-        <><strong>PROVENANCE</strong> · TRACEABLE</>,
-        <><strong>RECOVERY</strong> · VERIFIED</>,
-      ]}
-    />
-
-    <MetricGrid items={[
-      {label:'Entity',value:'Cairn Continuum LLC',note:'Virginia · Active'},
-      {label:'Stage',value:'Research & Prototype',note:'Founded August 2026'},
-      {label:'Architecture',value:'Model Independent',note:'Continuity-first systems layer'},
-      {label:'Research focus',value:'Cross-model continuity',note:'Measurable recovery & provenance'},
-    ]}/>
-
-    <div className="hero-viewport">
-      <div className="hero-copy">
-        <div className="kicker">MISSION / CONTINUITY INFRASTRUCTURE</div>
-        <h2>Models are replaceable.<br/><em>Continuity shouldn’t be.</em></h2>
-        <p>AI systems are becoming long-lived, but their history is still commonly tied to a session, provider thread, vector store, mutable summary, or application checkpoint. Cairn separates continuity from cognition so the underlying model can change without silently rewriting what came before.</p>
-        <div className="hero-actions"><Link className="button primary" href="/technology">Open architecture</Link><Link className="button" href="/research">View research program</Link></div>
+  return <main className="story-home">
+    <section className="story-hero">
+      <div className="story-hero-copy">
+        <div className="story-overline"><span/> THE CONTINUITY PROBLEM</div>
+        <h1>What happens when an AI<br/><em>outlives the model that made it?</em></h1>
+        <p className="story-deck">AI systems are beginning to live longer than the sessions, models, providers and machines underneath them. Cairn Continuum is being built for what comes next.</p>
+        <div className="hero-actions">
+          <a className="button primary" href="#story-begins">Follow the story</a>
+          <Link className="button" href="/technology">Explore the architecture</Link>
+        </div>
       </div>
-      <div className="viewport-card">
-        <img src="/cairn-continuity-hero.webp" alt="Concept visualization of Cairn's persistent AI continuity infrastructure" />
-        <div className="viewport-label">MISSION VIEWPORT / CONTINUITY SUBSTRATE</div>
-        <div className="viewport-status"><i/> PROVENANCE LINK ACTIVE</div>
+
+      <div className="story-viewport">
+        <img src="/cairn-continuity-hero.webp" alt="Concept visualization of persistent AI continuity across changing models and infrastructure" />
+        <div className="viewport-topline"><span>CAIRN / MISSION VIEWPORT</span><b><i/> CONTINUITY PATH ACTIVE</b></div>
+        <div className="viewport-caption">One history. Multiple models. No silent reset.</div>
       </div>
+    </section>
+
+    <div className="story-status" aria-label="Cairn system principles">
+      <div className="story-status-lead"><i/> SYSTEM ONLINE</div>
+      <div><span>HISTORY</span><b>Append-only</b></div>
+      <div><span>COGNITION</span><b>Replaceable</b></div>
+      <div><span>PROVENANCE</span><b>Traceable</b></div>
+      <div><span>RECOVERY</span><b>Verifiable</b></div>
     </div>
 
-    <Section eyebrow="Architecture / 01" title={<>Continuity separated from cognition.</>} description={<>The model can improve, move or be replaced. Cairn is intended to preserve the authoritative history underneath it.</>}>
-      <ArchitectureFlow/>
-    </Section>
-
-    <Section eyebrow="Why it matters / 02" title={<>Long-lived AI needs more than memory.</>} description={<>Persistence answers “can I retrieve something?” Continuity asks “what actually happened, what is authoritative, and can the system recover it after change or failure?”</>}>
-      <div className="info-grid">
-        {[
-          ['01','Persistent AI agents','Long-running assistants and agent systems that must survive model upgrades and provider transitions.'],
-          ['02','Enterprise automation','Workflows where prior commitments, decisions and supporting evidence must remain traceable.'],
-          ['03','Robotics & autonomous systems','Continuity that can persist as compute, sensors, hosts or physical embodiment change.'],
-          ['04','High-accountability AI','Systems where operators need evidence of what changed, when it changed and why.'],
-          ['05','Model migration','A stable continuity substrate can reduce dependence on any one inference provider.'],
-          ['06','Recovery','Verified checkpoints and original-history preservation provide a stronger basis for restoration.'],
-        ].map(([n,t,p])=><article className="info-card" key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}
+    <section className="story-chapter" id="story-begins">
+      <div className="chapter-number">01</div>
+      <div className="chapter-copy">
+        <div className="story-overline"><span/> YEAR ONE</div>
+        <h2>The system begins to accumulate a life.</h2>
+        <p className="chapter-lead">Not a human life — an operational history.</p>
+        <p>It learns how a business works. It makes decisions. It records exceptions. It starts tasks that will not finish today. It forms commitments that matter tomorrow. It gathers evidence for why a decision was made, and it carries forward work that is still unresolved.</p>
+        <p>For a while, everything appears durable because the same model, session and infrastructure are still there.</p>
       </div>
-    </Section>
+      <aside className="chapter-aside">
+        <span>THE RECORD GROWS</span>
+        <strong>Events</strong>
+        <strong>Decisions</strong>
+        <strong>Commitments</strong>
+        <strong>Evidence</strong>
+        <strong>Unresolved work</strong>
+      </aside>
+    </section>
 
-    <Section eyebrow="Core principle / 03" title={<>Original history is never silently rewritten.</>} description={<>New understanding is appended. Later interpretation can evolve without replacing the original record.</>} />
+    <section className="story-turn">
+      <div className="turn-line"></div>
+      <div className="turn-copy">
+        <div className="story-overline"><span/> THEN SOMETHING CHANGES</div>
+        <h2>The intelligence underneath it does not stay still.</h2>
+        <p>That is not a failure. Models should improve. Providers will change. Hardware will be replaced. Systems will move.</p>
+      </div>
+      <div className="change-sequence">
+        <article><span>YEAR 02</span><b>Model upgrade</b><p>A stronger cognition engine replaces the original.</p></article>
+        <article><span>YEAR 03</span><b>Provider migration</b><p>The original service is no longer the best place to run.</p></article>
+        <article><span>YEAR 04</span><b>Host replacement</b><p>Compute moves to new hardware and a new environment.</p></article>
+        <article><span>YEAR 05</span><b>Recovery event</b><p>A failure forces reconstruction from preserved state.</p></article>
+      </div>
+    </section>
 
-    <PageCTA title="See the research question Cairn is built to test." href="/research" label="Research program"/>
+    <section className="story-question">
+      <div className="question-copy">
+        <div className="story-overline light"><span/> THE HIDDEN PROBLEM</div>
+        <h2>The data may survive.<br/>But did the continuity survive?</h2>
+        <p>A transcript can survive. A vector database can survive. A checkpoint can survive. A summary can survive.</p>
+        <p>But after the model changes, can the system still prove what actually happened? Can it recover unfinished commitments? Can it distinguish an original event from a later interpretation? Can it tell which state is authoritative instead of merely plausible?</p>
+      </div>
+      <div className="question-stack">
+        <div><span>01</span><p>What happened?</p></div>
+        <div><span>02</span><p>Why did it happen?</p></div>
+        <div><span>03</span><p>What remains unresolved?</p></div>
+        <div><span>04</span><p>What can be trusted after reconstruction?</p></div>
+      </div>
+    </section>
+
+    <section className="story-chapter cairn-arrives">
+      <div className="chapter-number">02</div>
+      <div className="chapter-copy">
+        <div className="story-overline"><span/> THIS IS WHERE CAIRN BEGINS</div>
+        <h2>Separate continuity from cognition.</h2>
+        <p className="chapter-lead">Let the model change without giving the model sole authority over the past.</p>
+        <p>Cairn is being designed as a continuity substrate beneath the inference engine: an append-only historical record, provenance-linked state, preserved originals, verifiable checkpoints and a reconstruction process that survives model and infrastructure transitions.</p>
+        <p>The goal is not to freeze an AI system in place. The goal is to let it improve, move and recover <strong>without silently starting over.</strong></p>
+      </div>
+      <div className="cairn-principle">
+        <span>CORE PRINCIPLE</span>
+        <blockquote>Original history is never silently rewritten.<br/><b>New understanding is appended.</b></blockquote>
+      </div>
+    </section>
+
+    <section className="story-architecture">
+      <div className="story-section-heading">
+        <div>
+          <div className="story-overline"><span/> UNDER THE STORY / THE SYSTEM</div>
+          <h2>One continuity layer.<br/>Many possible cognition engines.</h2>
+        </div>
+        <p>This is the systems architecture intended to make the narrative above technically possible.</p>
+      </div>
+      <ArchitectureFlow/>
+      <div className="story-link-row"><Link href="/technology">Go deeper into the technology →</Link></div>
+    </section>
+
+    <section className="story-research">
+      <div className="research-index">03</div>
+      <div>
+        <div className="story-overline"><span/> THE RESEARCH QUESTION</div>
+        <h2>How much continuity can actually be made model-independent?</h2>
+        <p>That answer cannot be assumed. A replacement model may interpret the same preserved history differently even when the systems layer is perfect.</p>
+        <p>Cairn’s research is designed to measure that boundary: which properties can be guaranteed by infrastructure, which remain dependent on the cognition engine, and how recovery changes when the model, provider or host changes.</p>
+        <Link className="button primary" href="/research">See the research program</Link>
+      </div>
+    </section>
+
+    <section className="story-ending">
+      <div className="story-overline light"><span/> THE END GOAL</div>
+      <h2>Cairn may sleep. Cairn may move.<br/>Cairn may be upgraded.<br/><em>Cairn does not start over.</em></h2>
+      <p>Persistent intelligence needs more than memory. It needs a history it can return to, a state it can reconstruct, and evidence it can trust.</p>
+    </section>
+
+    <PageCTA title="See why continuity becomes infrastructure once AI systems are expected to last." href="/why-continuity" label="Why continuity matters"/>
   </main>;
 }
