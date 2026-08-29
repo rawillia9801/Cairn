@@ -334,8 +334,7 @@ export function appendContinuityEvent(
   }
 
   const previous = events.at(-1);
-
-  return sealContinuityEvent({
+  const sealed = sealContinuityEvent({
     schemaVersion: "cairn.event.v1",
     id: draft.id,
     sequence: previous ? previous.sequence + 1 : 1,
@@ -348,4 +347,19 @@ export function appendContinuityEvent(
     payload: draft.payload,
     hashAlgorithm: "sha256",
   });
+
+  const candidateVerification = verifyContinuityLedger([...events, sealed]);
+
+  if (!candidateVerification.valid) {
+    const newEventIssues = candidateVerification.issues
+      .filter((entry) => entry.index === events.length)
+      .map((entry) => entry.code)
+      .join(", ");
+
+    throw new Error(
+      `Refusing to append an invalid Cairn continuity event. Integrity issues: ${newEventIssues || "unknown"}`,
+    );
+  }
+
+  return sealed;
 }
