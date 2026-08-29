@@ -1,0 +1,46 @@
+{
+  "schema": "cairn.external-reference-lock.v1",
+  "recorded_at": "2026-08-29",
+  "purpose": "Pin external references used by Cairn research/development so architecture and benchmark work is reproducible without making these projects Cairn runtime dependencies.",
+  "boundary": "infrastructure-research-and-development-only",
+  "cairn_state_touched": false,
+  "references": [
+    {
+      "name": "LiveKit Agents",
+      "repository": "livekit/agents",
+      "commit": "cdb37ade6f8e80822e6c5ec4e6de457f2dcaf637",
+      "role": "Realtime transport/agent benchmark baseline",
+      "runtime_dependency": false
+    },
+    {
+      "name": "Archify",
+      "repository": "tt-a1i/archify",
+      "commit": "0853a805003514776bef3593ecca091409828902",
+      "role": "Deterministic architecture/research diagram tooling",
+      "runtime_dependency": false
+    },
+    {
+      "name": "Scientific Agent Skills",
+      "repository": "K-Dense-AI/scientific-agent-skills",
+      "commit": "895b4be37ef0ca1cd55c6e628e7ff937ba5a1cf1",
+      "role": "Curated research-methodology and grant-support reference",
+      "runtime_dependency": false
+    },
+    {
+      "name": "codebase-memory-mcp",
+      "repository": "DeusData/codebase-memory-mcp",
+      "commit": "51c48e2093e9ad6c375b396e9624a0135cfb8351",
+      "role": "Development-only source/code intelligence; never Cairn continuity memory",
+      "runtime_dependency": false,
+      "phase0_vps_install_allowed": false
+    },
+    {
+      "name": "OpenMontage",
+      "repository": "calesthio/OpenMontage",
+      "commit": "cd9f3c1f03368be87b140af494914b8ee4e3c7a4",
+      "role": "External media/research-run UX reference only",
+      "runtime_dependency": false,
+      "license_note": "AGPL-3.0: do not copy implementation into Cairn without deliberate license review"
+    }
+  ]
+}

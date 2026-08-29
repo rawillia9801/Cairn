@@ -1,0 +1,41 @@
+{
+  "metrics": [
+    {
+      "type": "stt_metrics",
+      "label": "synthetic-stt",
+      "request_id": "fixture-stt-1",
+      "timestamp": 1,
+      "duration": 0,
+      "audio_duration": 1.25,
+      "streamed": true,
+      "acquire_time": 0.038,
+      "connection_reused": true,
+      "metadata": {"model_name":"synthetic-stt","model_provider":"fixture"}
+    },
+    {
+      "type": "eou_metrics",
+      "timestamp": 2,
+      "end_of_utterance_delay": 0.31,
+      "transcription_delay": 0.12,
+      "on_user_turn_completed_delay": 0.02
+    },
+    {
+      "type": "tts_metrics",
+      "label": "synthetic-tts",
+      "request_id": "fixture-tts-1",
+      "timestamp": 3,
+      "ttfb": 0.19,
+      "duration": 0.8,
+      "audio_duration": 1.1,
+      "cancelled": false,
+      "characters_count": 42,
+      "streamed": true,
+      "acquire_time": 0.021,
+      "connection_reused": true,
+      "metadata": {"model_name":"synthetic-tts","model_provider":"fixture"},
+      "text": "THIS FIELD MUST NOT APPEAR IN NORMALIZED OUTPUT"
+    }
+  ],
+  "synthetic_fixture": true,
+  "authoritative": false
+}

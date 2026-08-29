@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "benchmark:transport": "node tools/transport-benchmark.mjs",
+    "benchmark:livekit-metrics": "node tools/livekit-metrics-normalize.mjs"
   },
   "dependencies": {
     "next": "15.5.24",
