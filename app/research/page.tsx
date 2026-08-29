@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { MissionHeader, PageCTA, Section } from '../components/mission-control';
 
 export default function Research(){
@@ -27,6 +28,26 @@ export default function Research(){
         ['05','History tampering','Detect deliberate mutation, deletion, reorder and replay attempts.'],
         ['06','Backup restoration','Restore from verified state and measure recovery correctness.'],
       ].map(([n,t,p])=><article className="info-card" key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}</div>
+    </Section>
+    <Section eyebrow="Scaling validation / 03" title="Three questions that can make or break the architecture." description="Cairn must demonstrate not only that continuity can be preserved, but that it remains useful, efficient and measurably stronger than simpler alternatives as systems scale.">
+      <div className="info-grid">{[
+        ['Q1','Cross-model continuity','Can operational continuity survive materially different cognition engines? Measure divergence in recovered commitments, provenance, state assertions and resumption behavior after model replacement.'],
+        ['Q2','Multi-year reconstruction efficiency','Can authoritative state be reconstructed efficiently at multi-year scale? Measure reconstruction latency, compute, storage and selective replay cost without requiring a full replay from genesis.'],
+        ['Q3','Structured provenance vs. long context','Does structured provenance provide measurable reliability, recovery and auditability advantages over brute-force long-context history? Compare both approaches under migration, corruption and recovery tests.'],
+      ].map(([n,t,p])=><article className="info-card" key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}</div>
+    </Section>
+    <Section eyebrow="Research notes / 04" title="Engineering the questions around persistent AI." description="Cairn Research Notes connect the continuity architecture to emerging questions in AI safety, accountability, governance and long-lived autonomous systems.">
+      <Link className="featured-research-note" href="/research/continuity-is-part-of-ai-safety">
+        <div className="featured-note-meta"><span>RESEARCH NOTE 001</span><b>AUGUST 2026</b></div>
+        <div className="featured-note-body">
+          <div>
+            <small>AI SAFETY · ACCOUNTABILITY · CONTINUITY</small>
+            <h3>Continuity Is Part of AI Safety</h3>
+            <p>Bill Gates recently described a turbulent period ahead as AI systems become more capable and autonomous. We examine one narrow but foundational part of that challenge: preserving attributable, recoverable history as models and infrastructure change.</p>
+          </div>
+          <span className="featured-note-arrow">→</span>
+        </div>
+      </Link>
     </Section>
     <PageCTA title="See where persistent continuity becomes operationally valuable." href="/applications" label="Applications"/>
   </main>;
