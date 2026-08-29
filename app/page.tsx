@@ -1,6 +1,63 @@
 import Link from 'next/link';
 import { ArchitectureFlow, PageCTA } from './components/mission-control';
 
+function ContinuityMissionViewport(){
+  return <div className="story-viewport" role="img" aria-label="Cairn continuity mission viewport showing verified history passing from one replaceable cognition engine through the Cairn continuity substrate to a replacement cognition engine">
+    <div className="viewport-art" aria-hidden="true"/>
+    <div className="viewport-scan" aria-hidden="true"/>
+
+    <div className="viewport-topline">
+      <span>CAIRN / CONTINUITY MISSION VIEWPORT</span>
+      <b><i/> PATH VERIFIED</b>
+    </div>
+
+    <div className="mission-flow" aria-hidden="true">
+      <div className="mission-node model-a">
+        <small>COGNITION A</small>
+        <strong>MODEL / HOST A</strong>
+        <span>replaceable</span>
+      </div>
+
+      <div className="mission-connector connector-a"><i/><i/><i/></div>
+
+      <div className="mission-core">
+        <div className="core-orbit orbit-one"/>
+        <div className="core-orbit orbit-two"/>
+        <div className="core-pulse"/>
+        <div className="core-label">
+          <small>AUTHORITATIVE LAYER</small>
+          <strong>CAIRN</strong>
+          <span>CONTINUITY SUBSTRATE</span>
+        </div>
+      </div>
+
+      <div className="mission-connector connector-b"><i/><i/><i/></div>
+
+      <div className="mission-node model-b">
+        <small>COGNITION B</small>
+        <strong>REPLACEMENT MODEL</strong>
+        <span>resumes from evidence</span>
+      </div>
+
+      <div className="checkpoint-card">
+        <span className="checkpoint-mark">✓</span>
+        <div><small>CHECKPOINT</small><strong>CRYPTOGRAPHICALLY VERIFIED</strong></div>
+      </div>
+
+      <div className="ledger-rail">
+        <div className="ledger-label"><small>APPEND-ONLY HISTORY</small><b>ORIGINAL RECORD PRESERVED</b></div>
+        <div className="ledger-line"><i/><i/><i/><i/><i/><i/></div>
+        <div className="ledger-meta"><span>EVENTS</span><span>PROVENANCE</span><span>COMMITMENTS</span><span>RECOVERY</span></div>
+      </div>
+    </div>
+
+    <div className="viewport-caption">
+      <span>LIVE CONCEPT</span>
+      <b>Model changes. History does not silently reset.</b>
+    </div>
+  </div>;
+}
+
 export default function HomePage(){
   return <main className="story-home">
     <section className="story-hero">
@@ -14,11 +71,7 @@ export default function HomePage(){
         </div>
       </div>
 
-      <div className="story-viewport">
-        <img src="/cairn-continuity-hero.webp" alt="Concept visualization of persistent AI continuity across changing models and infrastructure" />
-        <div className="viewport-topline"><span>CAIRN / MISSION VIEWPORT</span><b><i/> CONTINUITY PATH ACTIVE</b></div>
-        <div className="viewport-caption">One history. Multiple models. No silent reset.</div>
-      </div>
+      <ContinuityMissionViewport/>
     </section>
 
     <div className="story-status" aria-label="Cairn system principles">
