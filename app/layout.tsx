@@ -3,6 +3,7 @@ import './story.css';
 import './story-fallback.css';
 import './refinement.css';
 import './research-note.css';
+import './mission-viewport.css';
 import Link from 'next/link';
 
 export const metadata = {
