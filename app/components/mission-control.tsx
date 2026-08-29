@@ -43,24 +43,35 @@ export function Section({ eyebrow, title, description, children, className = '' 
 }
 
 export function ArchitectureFlow() {
-  const modules = [
-    ['01','Append-only history','Original events remain intact. New interpretations are appended rather than substituted.'],
-    ['02','Provenance','State claims trace to source events, artifacts, actors and versions.'],
-    ['03','Verified checkpoints','Recovery points can be cryptographically validated before resume or migration.'],
-    ['04','State reconstruction','Authoritative state is rebuilt from evidence rather than trusted mutable summaries.'],
-    ['05','Model transition','A replacement model rehydrates state without being required to imitate old outputs.'],
-    ['06','Failure recovery','Recovery is tested across abrupt termination, corrupted memory and provider loss.'],
+  const services = [
+    ['01','Append-only history','Original events remain immutable and time-ordered. New understanding is appended, never silently substituted.'],
+    ['02','Provenance','Claims remain traceable to sources, actors, models, versions and time.'],
+    ['03','Content-addressed originals','Original artifacts remain independently addressable by cryptographic content identity.'],
+    ['04','State reconstruction','Authoritative state is rebuilt from verified evidence rather than trusted mutable summaries.'],
+    ['05','Verifiable checkpoints','Recovery points can be cryptographically validated before resume, migration or rollback.'],
+    ['06','Recovery & transition','A replacement cognition engine can resume without state loss or forced imitation of old outputs.'],
   ];
-  return <div className="architecture-panel">
-    <div className="panel-bar"><span>CAIRN / REFERENCE ARCHITECTURE</span><b>● SYSTEM NOMINAL</b></div>
-    <div className="architecture-flow">
-      <div className="architecture-node"><small>COGNITION ENGINE A</small><strong>Model / Provider / Host</strong></div>
-      <i>→</i>
-      <div className="architecture-node core"><small>AUTHORITATIVE LAYER</small><strong>CAIRN CONTINUITY</strong></div>
-      <i>→</i>
-      <div className="architecture-node"><small>COGNITION ENGINE B</small><strong>Replacement / Upgrade</strong></div>
+  const persistence = [
+    ['Immutable persistence','History cannot be silently overwritten.'],
+    ['Cryptographic integrity','Objects and checkpoints can be hashed, linked and verified.'],
+    ['Portable recovery','Verified state can move across hosts and providers.'],
+    ['Operational resilience','The system is designed for failure, restoration and long-term change.'],
+  ];
+
+  return <div className="tech-architecture">
+    <div className="tech-bar"><span>CAIRN / REFERENCE ARCHITECTURE</span><b>● CONTINUITY SUBSTRATE NOMINAL</b></div>
+    <div className="tech-layer-label">Replaceable cognition layer</div>
+    <div className="tech-cognition">
+      <div className="tech-engine"><span>COGNITION ENGINE A</span><strong>Model / Provider / Host A</strong></div>
+      <div className="tech-arrow">→</div>
+      <div className="tech-core"><span>AUTHORITATIVE CONTINUITY LAYER</span><strong>CAIRN CONTINUITY</strong><small>Independent of any single model</small></div>
+      <div className="tech-arrow">→</div>
+      <div className="tech-engine"><span>COGNITION ENGINE B</span><strong>Replacement / Upgrade</strong></div>
     </div>
-    <div className="architecture-grid">{modules.map(([num,title,text]) => <article key={num}><span>{num}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+    <div className="tech-layer-label">Continuity services</div>
+    <div className="tech-services">{services.map(([n,t,p]) => <article className="tech-service" key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}</div>
+    <div className="tech-layer-label">Verified persistence</div>
+    <div className="tech-persistence">{persistence.map(([t,p]) => <article key={t}><b><i/>{t}</b><p>{p}</p></article>)}</div>
   </div>;
 }
 
