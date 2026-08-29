@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Cairn Phase 0 Infrastructure Boundary",
+    "output": "cairn-phase0.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "phase0-boundary",
+        "label": "Phase 0 boundary",
+        "focus": ["internet", "voice-edge", "freeswitch", "transport-bench", "preservation", "backup-domain", "future-cairn", "future-gpu"],
+        "note": "Shows prepared infrastructure and the explicit boundary that keeps authoritative Cairn state uninitialized during Phase 0."
+      },
+      {
+        "id": "transport-only",
+        "label": "Transport-only work",
+        "focus": ["internet", "freeswitch", "transport-bench", "livekit-ref"],
+        "note": "LiveKit and benchmark work may exercise infrastructure and transport only; they are not authoritative continuity state."
+      }
+    ]
+  },
+  "components": [
+    {"id":"internet","type":"external","label":"External Networks","sublabel":"HTTP / TCP / SIP / media","pos":[30,180],"size":[125,54]},
+    {"id":"voice-edge","type":"backend","label":"voice-edge-01","sublabel":"Debian 13 control-plane VPS","pos":[205,180],"size":[160,58],"tag":"Phase 0 host"},
+    {"id":"freeswitch","type":"backend","label":"FreeSWITCH","sublabel":"Installed; controlled transport role","pos":[420,80],"size":[155,54],"tag":"not Cairn state"},
+    {"id":"transport-bench","type":"backend","label":"Transport Bench","sublabel":"TCP / HTTP / route metrics","pos":[420,180],"size":[155,54],"tag":"non-authoritative"},
+    {"id":"livekit-ref","type":"cloud","label":"LiveKit Agents","sublabel":"External realtime baseline","pos":[420,280],"size":[155,54],"tag":"reference only"},
+    {"id":"preservation","type":"security","label":"Preservation Controls","sublabel":"Validated pre-runtime safeguards","pos":[635,110],"size":[165,58]},
+    {"id":"backup-domain","type":"database","label":"Independent Backups","sublabel":"Validated failure domain","pos":[635,250],"size":[165,58]},
+    {"id":"future-cairn","type":"backend","label":"Cairn Runtime","sublabel":"Authoritative continuity substrate","pos":[855,155],"size":[170,62],"tag":"NOT INITIALIZED"},
+    {"id":"future-gpu","type":"cloud","label":"Future GPU Node","sublabel":"Heavy inference / model diversity","pos":[855,275],"size":[170,58],"tag":"future"}
+  ],
+  "boundaries": [
+    {"kind":"region","label":"voice-edge-01 / Phase 0 prepared host","wraps":["voice-edge","freeswitch","transport-bench","preservation"]},
+    {"kind":"security-group","label":"Authoritative Cairn-state boundary","wraps":["future-cairn"]}
+  ],
+  "connections": [
+    {"id":"network-host","from":"internet","to":"voice-edge","label":"network traffic","variant":"emphasis"},
+    {"id":"host-fs","from":"voice-edge","to":"freeswitch","label":"transport capability","fromSide":"right","toSide":"left"},
+    {"id":"host-bench","from":"voice-edge","to":"transport-bench","label":"measure infrastructure","fromSide":"right","toSide":"left"},
+    {"id":"livekit-bench","from":"livekit-ref","to":"transport-bench","label":"baseline telemetry","variant":"dashed","fromSide":"left","toSide":"bottom"},
+    {"id":"preserve-backup","from":"preservation","to":"backup-domain","label":"independent recovery evidence","variant":"dashed"},
+    {"id":"prepared-not-initialized","from":"preservation","to":"future-cairn","label":"initialization requires separate gate","variant":"security"},
+    {"id":"gpu-future","from":"future-gpu","to":"future-cairn","label":"future cognition / inference","variant":"dashed","fromSide":"top","toSide":"bottom"}
+  ],
+  "cards": [
+    {"dot":"cyan","title":"Completed foundation","items":["Phase 0A complete","Phase 0B complete","Phase 0C-A complete","Major preservation/backups validated"]},
+    {"dot":"rose","title":"Hard boundary","items":["No Cairn identity/genesis","No authoritative ledger/history","No Cairn memory/checkpoints","No Commit Gate or Cairn inference runtime"]},
+    {"dot":"emerald","title":"Allowed now","items":["Transport/connectivity tests","Latency/availability/failure metrics","Reference-framework comparisons","Synthetic disposable fixtures only"]}
+  ]
+}
