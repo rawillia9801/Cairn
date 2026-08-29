@@ -1,5 +1,6 @@
 import './globals.css';
-import './narrative.css';
+import './story.css';
+import './story-fallback.css';
 import Link from 'next/link';
 
 export const metadata = {
