@@ -2,6 +2,7 @@ import './globals.css';
 import './story.css';
 import './story-fallback.css';
 import './refinement.css';
+import './research-note.css';
 import Link from 'next/link';
 
 export const metadata = {
