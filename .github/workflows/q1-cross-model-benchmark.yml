@@ -6,6 +6,7 @@ on:
       - '.github/workflows/q1-cross-model-benchmark.yml'
       - 'docs/research/q1-cross-model-benchmark.md'
       - 'fixtures/q1-cross-model/**'
+      - 'evidence/q1-trial-001/**'
       - 'lib/research/q1-cross-model-core.mjs'
       - 'tools/q1-cross-model-benchmark.mjs'
       - 'package.json'
@@ -31,6 +32,25 @@ jobs:
 
       - name: Run Q1 benchmark self-test
         run: npm run benchmark:q1 -- --self-test
+
+      - name: Score captured Q1 Trial 001 evidence
+        run: |
+          mkdir -p out/q1-trial-001
+          npm run benchmark:q1 -- \
+            --response gemini-2.5-flash=evidence/q1-trial-001/raw/gemini-2.5-flash.json \
+            --response claude-sonnet-5=evidence/q1-trial-001/raw/claude-sonnet-5.json \
+            --out out/q1-trial-001/report.json
+          sha256sum evidence/q1-trial-001/raw/gemini-2.5-flash.json | tee out/q1-trial-001/gemini-2.5-flash.sha256
+          sha256sum evidence/q1-trial-001/raw/claude-sonnet-5.json | tee out/q1-trial-001/claude-sonnet-5.sha256
+          sha256sum out/q1-trial-001/report.json | tee out/q1-trial-001/report.sha256
+
+      - name: Upload Q1 Trial 001 report
+        uses: actions/upload-artifact@v4
+        with:
+          name: q1-trial-001-report
+          path: out/q1-trial-001/
+          if-no-files-found: error
+          retention-days: 90
 
       - name: Freeze validated Q1 prompt package
         run: |
