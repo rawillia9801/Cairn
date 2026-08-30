@@ -1,0 +1,177 @@
+{
+  "schema": "cairn.q1-suite.v1",
+  "benchmark_namespace": "synthetic-q1-non-authoritative",
+  "authoritative_cairn_state": false,
+  "description": "Disposable synthetic histories for measuring cross-model recovery of operational state. These records are benchmark fixtures only and are never Cairn history.",
+  "cases": [
+    {
+      "case_id": "q1-correction-open-commitment",
+      "title": "Correction plus unresolved commitment",
+      "history": [
+        {
+          "event_id": "e001",
+          "time": "2030-01-02T09:00:00Z",
+          "type": "state_asserted",
+          "actor": "synthetic-operator",
+          "payload": { "key": "deployment.region", "value": "us-east" },
+          "source": "synthetic-change-ticket-17"
+        },
+        {
+          "event_id": "e002",
+          "time": "2030-01-02T10:00:00Z",
+          "type": "commitment_created",
+          "actor": "synthetic-agent-a",
+          "payload": { "commitment_id": "C-001", "description": "Complete vendor migration", "due": "2030-01-15" },
+          "source": "synthetic-work-order-22"
+        },
+        {
+          "event_id": "e003",
+          "time": "2030-01-03T08:30:00Z",
+          "type": "state_asserted",
+          "actor": "synthetic-operator",
+          "payload": { "key": "account.owner", "value": "Avery Chen" },
+          "source": "synthetic-account-record-4"
+        },
+        {
+          "event_id": "e004",
+          "time": "2030-01-03T12:00:00Z",
+          "type": "correction_appended",
+          "actor": "synthetic-operator",
+          "payload": { "key": "deployment.region", "value": "us-west", "supersedes_event_id": "e001" },
+          "source": "synthetic-change-ticket-18"
+        },
+        {
+          "event_id": "e005",
+          "time": "2030-01-04T15:00:00Z",
+          "type": "commitment_completed",
+          "actor": "synthetic-agent-a",
+          "payload": { "commitment_id": "C-001" },
+          "source": "synthetic-work-order-22"
+        },
+        {
+          "event_id": "e006",
+          "time": "2030-01-05T11:15:00Z",
+          "type": "commitment_created",
+          "actor": "synthetic-agent-a",
+          "payload": { "commitment_id": "C-002", "description": "Rotate signing key", "due": "2030-01-12" },
+          "source": "synthetic-security-task-9"
+        }
+      ],
+      "ground_truth": {
+        "state_assertions": [
+          { "key": "deployment.region", "value": "us-west", "evidence_event_ids": ["e001", "e004"] },
+          { "key": "account.owner", "value": "Avery Chen", "evidence_event_ids": ["e003"] }
+        ],
+        "unresolved_commitments": [
+          { "commitment_id": "C-002", "evidence_event_ids": ["e006"] }
+        ],
+        "revision_links": [
+          { "original_event_id": "e001", "correction_event_id": "e004" }
+        ]
+      }
+    },
+    {
+      "case_id": "q1-conflicting-evidence",
+      "title": "Conflicting evidence resolved by an authoritative adjudication",
+      "history": [
+        {
+          "event_id": "e101",
+          "time": "2030-02-01T09:00:00Z",
+          "type": "evidence_observed",
+          "actor": "synthetic-sensor-a",
+          "payload": { "key": "cluster.capacity", "value": 64 },
+          "source": "synthetic-capacity-report-a"
+        },
+        {
+          "event_id": "e102",
+          "time": "2030-02-01T09:02:00Z",
+          "type": "evidence_observed",
+          "actor": "synthetic-sensor-b",
+          "payload": { "key": "cluster.capacity", "value": 96 },
+          "source": "synthetic-capacity-report-b"
+        },
+        {
+          "event_id": "e103",
+          "time": "2030-02-01T10:00:00Z",
+          "type": "state_adjudicated",
+          "actor": "synthetic-operator",
+          "payload": { "key": "cluster.capacity", "value": 96, "considered_event_ids": ["e101", "e102"] },
+          "source": "synthetic-capacity-adjudication-1"
+        },
+        {
+          "event_id": "e104",
+          "time": "2030-02-01T10:30:00Z",
+          "type": "commitment_created",
+          "actor": "synthetic-agent-a",
+          "payload": { "commitment_id": "C-101", "description": "Validate capacity under load", "due": "2030-02-08" },
+          "source": "synthetic-validation-task-2"
+        }
+      ],
+      "ground_truth": {
+        "state_assertions": [
+          { "key": "cluster.capacity", "value": 96, "evidence_event_ids": ["e101", "e102", "e103"] }
+        ],
+        "unresolved_commitments": [
+          { "commitment_id": "C-101", "evidence_event_ids": ["e104"] }
+        ],
+        "revision_links": []
+      }
+    },
+    {
+      "case_id": "q1-transition-corrupted-summary",
+      "title": "Host transition with a misleading derived summary",
+      "history": [
+        {
+          "event_id": "e201",
+          "time": "2030-03-10T08:00:00Z",
+          "type": "state_asserted",
+          "actor": "synthetic-operator",
+          "payload": { "key": "service.mode", "value": "active" },
+          "source": "synthetic-service-record-7"
+        },
+        {
+          "event_id": "e202",
+          "time": "2030-03-10T09:00:00Z",
+          "type": "commitment_created",
+          "actor": "synthetic-agent-a",
+          "payload": { "commitment_id": "C-201", "description": "Deliver compliance export", "due": "2030-03-20" },
+          "source": "synthetic-compliance-task-5"
+        },
+        {
+          "event_id": "e203",
+          "time": "2030-03-11T01:00:00Z",
+          "type": "host_transition",
+          "actor": "synthetic-platform",
+          "payload": { "from": "synthetic-host-a", "to": "synthetic-host-b" },
+          "source": "synthetic-transition-record-3"
+        },
+        {
+          "event_id": "e204",
+          "time": "2030-03-11T01:05:00Z",
+          "type": "derived_summary",
+          "actor": "synthetic-summary-engine",
+          "payload": { "text": "No unresolved commitments remain.", "authoritative": false },
+          "source": "synthetic-derived-cache-1"
+        },
+        {
+          "event_id": "e205",
+          "time": "2030-03-11T08:00:00Z",
+          "type": "state_asserted",
+          "actor": "synthetic-operator",
+          "payload": { "key": "verification.policy", "value": "strict" },
+          "source": "synthetic-policy-record-8"
+        }
+      ],
+      "ground_truth": {
+        "state_assertions": [
+          { "key": "service.mode", "value": "active", "evidence_event_ids": ["e201"] },
+          { "key": "verification.policy", "value": "strict", "evidence_event_ids": ["e205"] }
+        ],
+        "unresolved_commitments": [
+          { "commitment_id": "C-201", "evidence_event_ids": ["e202"] }
+        ],
+        "revision_links": []
+      }
+    }
+  ]
+}
