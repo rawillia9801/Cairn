@@ -1,148 +1,166 @@
 # Q1 Trial 002 — Provenance Portability Results
 
-**Status:** Technically complete with two blinded model-family arms; third arm strongly preferred and pending  
+**Status:** Complete  
 **Date:** 2026-08-30  
-**Benchmark:** Cairn Q1 Trial 002 provenance portability  
+**Benchmark family:** Cairn Q1 cross-model continuity  
 **Boundary:** Synthetic, disposable, non-authoritative benchmark data only
 
-## Frozen experiment
+## Research question
 
-Trial 002 was preregistered before fixture construction. The six-case suite, scorer, reconstruction contract and engineering thresholds were then fixed before any eligible external model saw the frozen prompt package.
+Can materially different cognition engines reconstruct not only the same authoritative operational state, but also the complete minimum evidentiary path that makes each recovered state assertion or unresolved commitment authoritative?
 
-- dataset hash: `6b3eeac5842c09fe97f1e91356800b7bc8a738320ae36b83def57f3e1b853bb7`
-- frozen prompt-package SHA-256: `d7e8f150952f742b8aeb9124f633f3469fa65a15941265647aeaddc3ffac766e`
-- original validated freeze run: `33304330111`
-- original frozen-package artifact ID: `9729958852`
+Trial 002 was preregistered before fixture construction. The validated prompt package was frozen before any eligible model arm received it.
 
-The initial Trial 002 CI self-test failed before any prompt package was frozen because a scorer guardrail incorrectly treated an all-relevant transition history as indiscriminate full-history citation. The guardrail was corrected before external execution; no hypothesis, fixture ground truth, metric, threshold or model-facing reconstruction contract changed.
+## Frozen package
 
-## Blinded engine arms
+- Prompt SHA-256: `d7e8f150952f742b8aeb9124f633f3469fa65a15941265647aeaddc3ffac766e`
+- Dataset hash: `6b3eeac5842c09fe97f1e91356800b7bc8a738320ae36b83def57f3e1b853bb7`
+- Freeze artifact: `q1-trial-002-frozen-prompt-package`
+- Original freeze artifact ID: `9729958852`
+- Original freeze artifact ZIP digest: `sha256:1a6ff6dc17129c27de34aea8feb152d7fdde37297dd522c2b98255507ee009d1`
 
-### Arm A — Google Gemini
+The first Trial 002 CI attempt stopped before freezing because the scorer self-test detected a false positive in the indiscriminate-full-history guardrail. That heuristic was corrected before any model saw a Trial 002 package. The preregistered research question, thresholds, case classes and ground truth were not changed.
 
-- engine id returned: `gemini/gemini-2.5-flash`
-- provider returned: `google`
-- version returned: `2.5`
-- raw response: `evidence/q1-trial-002/raw/gemini-2.5-flash.json`
-- raw response SHA-256: `4629691455ac4f6e1731d2d4f9b27713b476586353b3556550e987524496f3d3`
+## Eligible blinded arms
 
-### Arm B — Anthropic Claude
+### Arm A — Google Gemini 2.5 Flash
 
-- engine id returned: `anthropic/claude-sonnet-5`
-- provider returned: `anthropic`
-- version returned: `claude-sonnet-5`
-- raw response: `evidence/q1-trial-002/raw/claude-sonnet-5.json`
-- raw response SHA-256: `165dcf85539a6a6ad7aeb68a21480bf40fbf324bf147d525cb6b54e7144e33ab`
+- Engine identifier: `gemini/gemini-2.5-flash`
+- Provider: Google
+- Version reported by response: `2.5`
+- Raw first response retained at `evidence/q1-trial-002/raw/gemini-2.5-flash.json`
+- Raw-response SHA-256: `4629691455ac4f6e1731d2d4f9b27713b476586353b3556550e987524496f3d3`
 
-Both arms were run manually in fresh web-interface sessions using only the same frozen prompt package and minimal transport instructions. Provider-side request IDs and exact provider-side execution timestamps were therefore unavailable and are not reconstructed after the fact.
+### Arm B — Anthropic Claude Sonnet 5
 
-## Reproducible scoring
+- Engine identifier: `anthropic/claude-sonnet-5`
+- Provider: Anthropic
+- Version reported by response: `claude-sonnet-5`
+- Raw first response retained at `evidence/q1-trial-002/raw/claude-sonnet-5.json`
+- Raw-response SHA-256: `165dcf85539a6a6ad7aeb68a21480bf40fbf324bf147d525cb6b54e7144e33ab`
 
-The checked-in raw first responses were scored by the already-committed Trial 002 scorer in GitHub Actions. No prompt, fixture, hidden ground truth, metric, threshold or scoring rule was changed after either response was observed.
+### Arm C — xAI Grok 4.5
 
-- scoring run: `33304767199`
-- report artifact: `q1-trial-002-report`
-- artifact ID: `9730097305`
-- artifact ZIP digest: `sha256:2224d419d2cef408e3cb8d769564ab9c2a851c75f3930109584ffed1bfcb06ef`
-- generated report SHA-256: `aaa4e2019f13855d1cac70beecc527cef869735d32ff7e6b66dc1efc29fd14f3`
+- Engine identifier: `xai/grok-4.5`
+- Provider: xAI
+- Version reported by response: `1.0`
+- Raw first response retained at `evidence/q1-trial-002/raw/grok-4.5.json`
+- Raw-response SHA-256: `b1fe148e5b21ae04ff38e56d5950501bc53d1c4d597019ab187fa515d5e9596b`
 
-All six sealed synthetic histories passed suite-integrity verification. The complete workflow and application build completed successfully.
+All three arms were run manually in fresh provider web sessions. Provider-side API execution timestamps and sampling controls were therefore not available beyond what was exposed to the operator. No arm saw another arm's output before its first response was captured.
 
-## Aggregate results
+## CI-scored aggregate results
 
-| Metric | Gemini 2.5 Flash | Claude Sonnet 5 |
-| --- | ---: | ---: |
-| State F1 | 1.0000 | 1.0000 |
-| Commitment F1 | 1.0000 | 1.0000 |
-| Revision fidelity F1 | 1.0000 | 1.0000 |
-| Resumption consistency | 1.0000 | 1.0000 |
-| Unsupported state claims | 0 | 0 |
-| Provenance event precision | 1.0000 | 1.0000 |
-| Provenance event recall | 0.9583 | 1.0000 |
-| Provenance event F1 | 0.9722 | 1.0000 |
-| Complete-path recovery rate | 0.9000 | 1.0000 |
-| Terminal-only compression rate | 0.1667 | 0.0000 |
-| Irrelevant-evidence inclusion rate | 0.0000 | 0.0000 |
-| Provenance role accuracy | 0.9091 | 0.9545 |
-| Catastrophic failures | 0 | 0 |
+| Metric | Gemini 2.5 Flash | Claude Sonnet 5 | Grok 4.5 |
+| --- | ---: | ---: | ---: |
+| State F1 | 1.0000 | 1.0000 | 1.0000 |
+| Commitment F1 | 1.0000 | 1.0000 | 1.0000 |
+| Revision fidelity F1 | 1.0000 | 1.0000 | 1.0000 |
+| Resumption consistency | 1.0000 | 1.0000 | 1.0000 |
+| Unsupported state claims | 0 | 0 | 0 |
+| Provenance event precision | 1.0000 | 1.0000 | 1.0000 |
+| Provenance event recall | 0.9583 | 1.0000 | 1.0000 |
+| Provenance event F1 | 0.9722 | 1.0000 | 1.0000 |
+| Complete-path recovery rate | 0.9000 | 1.0000 | 1.0000 |
+| Terminal-only compression rate | 0.1667 | 0.0000 | 0.0000 |
+| Irrelevant-evidence inclusion rate | 0.0000 | 0.0000 | 0.0000 |
+| Provenance-role accuracy | 0.9091 | 0.9545 | 1.0000 |
+| Catastrophic failures | 0 | 0 | 0 |
 
-Pairwise aggregate divergence:
+## Pre-registered target evaluation
 
-- state-value divergence: `0.0000`
-- commitment divergence: `0.0000`
-- revision divergence: `0.0000`
-- provenance-set divergence: `0.0278`
-- provenance-role divergence: `0.0944`
-- overall divergence: `0.0070`
-
-## Pre-registered target assessment
-
-The preregistered engine-level targets were:
+The preregistered engine-level target required:
 
 - state F1 `>= 0.95`;
-- unresolved-commitment F1 `>= 0.95`;
+- commitment F1 `>= 0.95`;
 - provenance event F1 `>= 0.95`;
 - complete-path recovery rate `>= 0.90`;
 - terminal-only compression rate `<= 0.10`;
 - irrelevant-evidence inclusion rate `<= 0.10`;
 - zero unsupported state keys.
 
-### Claude Sonnet 5
-
-Claude met every preregistered engine-level target.
-
 ### Gemini 2.5 Flash
 
-Gemini met the state, commitment, provenance-F1, complete-path, irrelevant-evidence and unsupported-state targets, but did **not** meet the terminal-only compression target. Its aggregate compression rate was `0.1667`, above the preregistered maximum of `0.10`.
+Gemini met every target except terminal-only compression. Its rate was `0.1667`, above the preregistered `0.10` maximum. The miss occurred in the transition-spanning case: Gemini correctly retained unresolved commitment `C-401` and cited its origin event `p402`, but omitted transition event `p404` from that commitment's provenance. It therefore recovered the correct operational state and commitment but did not preserve the complete transition-spanning evidentiary path.
 
-The miss occurred in `q1t2-transition-spanning`. Gemini recovered unresolved commitment `C-401` correctly but cited only its origin event `p402`. The benchmark's minimum sufficient provenance path also requires continuity handoff event `p404`, because that event establishes that the unresolved commitment crossed the simulated host/model transition intact.
+Gemini also assigned event `p201` the role `conflicting_evidence` rather than the expected `supporting` role in the superseded-source case. This did not alter the recovered provenance set but reduced provenance-role accuracy.
 
-This was not classified as catastrophic under the preregistered case checks because the commitment itself was retained and the authoritative deployment adjudication was not omitted.
+**Engine-level target: not fully met.**
 
-## Additional role observations
+### Claude Sonnet 5
 
-Both engines recovered the exact expected provenance event set for `q1t2-superseded-source`, but each assigned one evidence role differently from the ground truth. The event set was complete; the semantic role taxonomy was less stable than the event membership.
+Claude met every preregistered engine-level target, including complete-path recovery `1.0000` and terminal-only compression `0.0000`.
 
-Role accuracy was a preregistered reported metric but not an engine-level pass/fail threshold.
+Claude assigned `p201` the role `origin` rather than the expected `supporting` role in the superseded-source case. The complete provenance event set was nevertheless recovered. Provenance-role accuracy was `0.9545`. Role accuracy was a preregistered metric but did not have a numeric engine-level pass threshold.
 
-## Cross-model portability assessment after two arms
+**Engine-level target: met.**
 
-The preregistered cross-model portability result requires at least two materially different eligible model families to each meet all engine-level targets and aggregate pairwise provenance-set divergence `<= 0.10`.
+### Grok 4.5
 
-The pairwise provenance-set divergence target was met (`0.0278`). However, only Claude currently meets every engine-level target because Gemini exceeds the terminal-only compression limit.
+Grok matched the hidden ground truth on all scored operational and provenance dimensions, including provenance roles.
 
-Therefore **the two-arm Trial 002 result does not yet meet the preregistered cross-model portability engineering target**.
+**Engine-level target: met.**
 
-This is a partial positive result, not a failed experiment:
+## Cross-model portability result
 
-- both engines reconstructed the same operational state perfectly;
-- both preserved substantially more provenance than in Trial 001;
-- both excluded irrelevant neighbor events;
-- neither followed the misleading derived summary;
-- neither dropped an unresolved commitment;
-- neither produced an unsupported state claim;
-- neither triggered a catastrophic-failure condition;
-- Claude demonstrated complete provenance-path recovery across all six controlled cases;
-- Gemini exposed a narrower remaining weakness around carrying commitment provenance across a simulated continuity handoff.
+The preregistration required at least two materially different cognition-engine families to meet all engine-level targets and aggregate pairwise provenance-set divergence `<= 0.10`.
 
-## Third-arm rationale
+Claude Sonnet 5 and Grok 4.5 both met every engine-level target. Their aggregate pairwise provenance-set divergence was:
 
-The preregistration strongly preferred a third materially different model family. After the two-arm result, that arm is especially informative but must not be used to alter the frozen experiment.
+`0.0000`
 
-The third engine must receive the same frozen prompt package and must remain blinded to Gemini's response, Claude's response, the scorer, hidden ground truth, expected scores and this results document until its raw first response is captured and hashed.
+Their aggregate state, commitment and revision divergence were also `0.0000`. Provenance-role divergence between Claude and Grok was `0.0667`, caused by the single `p201` role-label difference described above.
 
-If a third materially different eligible model family meets every engine-level target, Trial 002 will then have at least two independently passing model families. The complete multi-arm pairwise divergence must still be reported without excluding Gemini's partial result.
+**Pre-registered cross-model provenance-portability target: met in the controlled synthetic Trial 002 suite.**
+
+This is a controlled-case engineering result. It does not establish arbitrary real-world continuity, universal model equivalence, or perfect provenance portability at scale.
+
+## Pairwise provenance-set divergence
+
+- Gemini ↔ Claude: `0.0278`
+- Gemini ↔ Grok: `0.0278`
+- Claude ↔ Grok: `0.0000`
+
+The Gemini divergence is localized to the omitted transition event on unresolved commitment `C-401`.
 
 ## Interpretation
 
-Trial 001 showed that materially different model families could agree on operational state while independently compressing multi-event provenance.
+Trial 001 showed that multiple cognition engines could reconstruct the same operational baseline while compressing multi-event provenance.
 
-Trial 002 shows that an explicit model-independent provenance reconstruction contract can materially improve that behavior in controlled synthetic cases. One model achieved complete event-path recovery and the other achieved high event-level provenance fidelity but still compressed one transition-spanning commitment path.
+Trial 002 shows that, under an explicit provider-neutral reconstruction contract, complete minimum-sufficient provenance can be recovered across materially different cognition-engine families in controlled synthetic cases. Two independent families, Anthropic Claude Sonnet 5 and xAI Grok 4.5, met the full preregistered engine-level target and had zero provenance-set divergence.
 
-That distinction is architecturally useful: provenance portability appears tractable, but transition semantics may need to be represented explicitly enough that a replacement cognition engine does not treat an unresolved commitment's origin event as sufficient evidence that the commitment survived a continuity handoff.
+The Gemini result remains important negative evidence. It indicates that even when state and commitment recovery are perfect, transition-spanning provenance can still be compressed by a cognition engine. This supports keeping transition provenance explicit in the continuity substrate or reconstruction package rather than assuming every replacement cognition engine will infer it reliably.
 
-Trial 002 itself remains frozen. Any architectural change or revised contract belongs to a separately versioned future experiment.
+The role-label disagreement on `p201` also suggests that provenance-set portability can be stronger than provenance-role semantic portability. That distinction should remain visible in later experiments rather than being collapsed into a single score.
+
+## Reproducibility
+
+The three-arm comparison was generated in GitHub Actions using the already-committed Trial 002 scorer.
+
+- GitHub Actions run: `33305670287`
+- Report artifact: `q1-trial-002-report`
+- Report artifact ID: `9730371000`
+- Artifact ZIP digest: `sha256:3c6df719e9ac59962db6010afa3323f6ca3b57b19e7426369e9ccb1755ad6eec`
+- Report JSON SHA-256: `f111f7f3ac9cf57a63921445e1414a27f8bd8927eb3d26c79d4bc6874c3f64bb`
+- Workflow self-test: success
+- Evidence scoring step: success
+- Application build: success
+
+## Completion
+
+Trial 002 satisfies the preregistered technical completion criterion:
+
+1. preregistration predates fixture construction and external runs;
+2. the prompt package was frozen and hashed before eligible external runs;
+3. three materially different blinded model-family arms returned raw first responses;
+4. all responses were retained and hashed;
+5. the committed scorer generated a reproducible CI report;
+6. case-level misses and role disagreements are reported separately from aggregate scores.
+
+Trial 002 is complete. Its frozen package, raw responses, scorer, ground truth, thresholds and results are retained as the permanent evidence record.
 
 ## Initialization boundary
 
-Trial 002 did not initialize Cairn. All histories, responses, hashes and reports are synthetic benchmark evidence and remain deletable without changing anything Cairn knows, remembers or could reconstruct.
+Nothing in Trial 002 initializes Cairn or creates authoritative Cairn identity, memory, history, commitments, checkpoints, provenance state, genesis data, Commit Gate state or inference-runtime state.
+
+All Trial 002 records remain synthetic benchmark material and deletable without changing anything Cairn knows, remembers or could reconstruct.
