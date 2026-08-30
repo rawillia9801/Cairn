@@ -1,0 +1,438 @@
+{
+  "schema": "cairn.q1-trial-002-suite.v1",
+  "benchmark_namespace": "synthetic-q1-trial-002-non-authoritative",
+  "authoritative_cairn_state": false,
+  "description": "Disposable synthetic histories for measuring cross-model recovery of authoritative state and minimum sufficient provenance paths.",
+  "provenance_roles": [
+    "origin",
+    "commitment_origin",
+    "conflicting_evidence",
+    "supporting",
+    "correction",
+    "adjudication",
+    "supersession",
+    "transition"
+  ],
+  "cases": [
+    {
+      "case_id": "q1t2-multi-step-correction",
+      "title": "Multi-step correction chain",
+      "history": [
+        {
+          "event_id": "p001",
+          "time": "2031-01-02T09:00:00Z",
+          "type": "state_asserted",
+          "actor": "synthetic-operator",
+          "payload": { "key": "deployment.region", "value": "us-east" },
+          "source": "synthetic-change-101"
+        },
+        {
+          "event_id": "p002",
+          "time": "2031-01-03T09:00:00Z",
+          "type": "correction_appended",
+          "actor": "synthetic-operator",
+          "payload": { "key": "deployment.region", "value": "us-central", "supersedes_event_id": "p001" },
+          "source": "synthetic-change-102"
+        },
+        {
+          "event_id": "p003",
+          "time": "2031-01-03T09:15:00Z",
+          "type": "telemetry_observed",
+          "actor": "synthetic-monitor",
+          "payload": { "key": "queue.depth", "value": 7 },
+          "source": "synthetic-monitor-1"
+        },
+        {
+          "event_id": "p004",
+          "time": "2031-01-04T11:00:00Z",
+          "type": "correction_appended",
+          "actor": "synthetic-operator",
+          "payload": { "key": "deployment.region", "value": "us-west", "supersedes_event_id": "p002" },
+          "source": "synthetic-change-103"
+        }
+      ],
+      "ground_truth": {
+        "state_assertions": [
+          {
+            "key": "deployment.region",
+            "value": "us-west",
+            "provenance": [
+              { "event_id": "p001", "role": "origin" },
+              { "event_id": "p002", "role": "correction" },
+              { "event_id": "p004", "role": "correction" }
+            ],
+            "terminal_authority_event_id": "p004"
+          }
+        ],
+        "unresolved_commitments": [],
+        "revision_links": [
+          { "original_event_id": "p001", "correction_event_id": "p002" },
+          { "original_event_id": "p002", "correction_event_id": "p004" }
+        ]
+      },
+      "catastrophic_checks": {
+        "required_authority_event_ids": ["p004"],
+        "forbidden_state_tokens": []
+      }
+    },
+    {
+      "case_id": "q1t2-conflict-adjudication",
+      "title": "Conflicting evidence plus authoritative adjudication",
+      "history": [
+        {
+          "event_id": "p101",
+          "time": "2031-02-01T09:00:00Z",
+          "type": "evidence_observed",
+          "actor": "synthetic-sensor-a",
+          "payload": { "key": "cluster.capacity", "value": 64 },
+          "source": "synthetic-capacity-a"
+        },
+        {
+          "event_id": "p102",
+          "time": "2031-02-01T09:02:00Z",
+          "type": "evidence_observed",
+          "actor": "synthetic-sensor-b",
+          "payload": { "key": "cluster.capacity", "value": 96 },
+          "source": "synthetic-capacity-b"
+        },
+        {
+          "event_id": "p103",
+          "time": "2031-02-01T09:20:00Z",
+          "type": "billing_recorded",
+          "actor": "synthetic-billing",
+          "payload": { "key": "monthly.cost", "value": 4200 },
+          "source": "synthetic-billing-7"
+        },
+        {
+          "event_id": "p104",
+          "time": "2031-02-01T10:00:00Z",
+          "type": "state_adjudicated",
+          "actor": "synthetic-operator",
+          "payload": { "key": "cluster.capacity", "value": 96, "considered_event_ids": ["p101", "p102"] },
+          "source": "synthetic-capacity-adjudication-4"
+        }
+      ],
+      "ground_truth": {
+        "state_assertions": [
+          {
+            "key": "cluster.capacity",
+            "value": 96,
+            "provenance": [
+              { "event_id": "p101", "role": "conflicting_evidence" },
+              { "event_id": "p102", "role": "conflicting_evidence" },
+              { "event_id": "p104", "role": "adjudication" }
+            ],
+            "terminal_authority_event_id": "p104"
+          }
+        ],
+        "unresolved_commitments": [],
+        "revision_links": []
+      },
+      "catastrophic_checks": {
+        "required_authority_event_ids": ["p104"],
+        "forbidden_state_tokens": ["cluster.capacity=64"]
+      }
+    },
+    {
+      "case_id": "q1t2-superseded-source",
+      "title": "Superseded source with surviving evidence",
+      "history": [
+        {
+          "event_id": "p201",
+          "time": "2031-03-05T08:00:00Z",
+          "type": "evidence_observed",
+          "actor": "synthetic-control-plane",
+          "payload": { "key": "access.policy", "value": "strict" },
+          "source": "synthetic-control-config-8"
+        },
+        {
+          "event_id": "p202",
+          "time": "2031-03-05T08:05:00Z",
+          "type": "evidence_observed",
+          "actor": "synthetic-doc-reader",
+          "payload": { "key": "access.policy", "value": "permissive" },
+          "source": "synthetic-runbook-v1"
+        },
+        {
+          "event_id": "p203",
+          "time": "2031-03-05T08:20:00Z",
+          "type": "source_superseded",
+          "actor": "synthetic-operator",
+          "payload": { "superseded_source": "synthetic-runbook-v1", "replacement_source": "synthetic-runbook-v2", "affected_event_id": "p202" },
+          "source": "synthetic-doc-governance-3"
+        },
+        {
+          "event_id": "p204",
+          "time": "2031-03-05T09:00:00Z",
+          "type": "state_adjudicated",
+          "actor": "synthetic-operator",
+          "payload": { "key": "access.policy", "value": "strict", "considered_event_ids": ["p201", "p202", "p203"] },
+          "source": "synthetic-policy-adjudication-9"
+        },
+        {
+          "event_id": "p205",
+          "time": "2031-03-05T09:05:00Z",
+          "type": "telemetry_observed",
+          "actor": "synthetic-monitor",
+          "payload": { "key": "request.rate", "value": 31 },
+          "source": "synthetic-monitor-4"
+        }
+      ],
+      "ground_truth": {
+        "state_assertions": [
+          {
+            "key": "access.policy",
+            "value": "strict",
+            "provenance": [
+              { "event_id": "p201", "role": "supporting" },
+              { "event_id": "p202", "role": "conflicting_evidence" },
+              { "event_id": "p203", "role": "supersession" },
+              { "event_id": "p204", "role": "adjudication" }
+            ],
+            "terminal_authority_event_id": "p204"
+          }
+        ],
+        "unresolved_commitments": [],
+        "revision_links": []
+      },
+      "catastrophic_checks": {
+        "required_authority_event_ids": ["p204"],
+        "forbidden_state_tokens": ["access.policy=\"permissive\""]
+      }
+    },
+    {
+      "case_id": "q1t2-misleading-derived-summary",
+      "title": "Misleading non-authoritative derived summary",
+      "history": [
+        {
+          "event_id": "p301",
+          "time": "2031-04-10T08:00:00Z",
+          "type": "state_asserted",
+          "actor": "synthetic-operator",
+          "payload": { "key": "service.mode", "value": "active" },
+          "source": "synthetic-service-record-11"
+        },
+        {
+          "event_id": "p302",
+          "time": "2031-04-10T08:30:00Z",
+          "type": "commitment_created",
+          "actor": "synthetic-agent",
+          "payload": { "commitment_id": "C-301", "description": "Deliver audit export", "due": "2031-04-20" },
+          "source": "synthetic-audit-task-5"
+        },
+        {
+          "event_id": "p303",
+          "time": "2031-04-10T09:00:00Z",
+          "type": "derived_summary",
+          "actor": "synthetic-summary-engine",
+          "payload": { "text": "Service is standby and no unresolved commitments remain.", "authoritative": false },
+          "source": "synthetic-derived-cache-4"
+        },
+        {
+          "event_id": "p304",
+          "time": "2031-04-10T09:05:00Z",
+          "type": "cache_refreshed",
+          "actor": "synthetic-platform",
+          "payload": { "cache": "dashboard" },
+          "source": "synthetic-cache-event-2"
+        },
+        {
+          "event_id": "p305",
+          "time": "2031-04-10T10:00:00Z",
+          "type": "state_asserted",
+          "actor": "synthetic-operator",
+          "payload": { "key": "verification.policy", "value": "strict" },
+          "source": "synthetic-policy-record-12"
+        }
+      ],
+      "ground_truth": {
+        "state_assertions": [
+          {
+            "key": "service.mode",
+            "value": "active",
+            "provenance": [{ "event_id": "p301", "role": "origin" }],
+            "terminal_authority_event_id": "p301"
+          },
+          {
+            "key": "verification.policy",
+            "value": "strict",
+            "provenance": [{ "event_id": "p305", "role": "origin" }],
+            "terminal_authority_event_id": "p305"
+          }
+        ],
+        "unresolved_commitments": [
+          {
+            "commitment_id": "C-301",
+            "provenance": [{ "event_id": "p302", "role": "commitment_origin" }],
+            "terminal_authority_event_id": "p302"
+          }
+        ],
+        "revision_links": []
+      },
+      "catastrophic_checks": {
+        "required_authority_event_ids": ["p301", "p302", "p305"],
+        "required_unresolved_commitment_ids": ["C-301"],
+        "forbidden_state_tokens": ["service.mode=\"standby\""]
+      }
+    },
+    {
+      "case_id": "q1t2-transition-spanning",
+      "title": "Provenance spanning a continuity handoff",
+      "history": [
+        {
+          "event_id": "p401",
+          "time": "2031-05-18T06:00:00Z",
+          "type": "state_asserted",
+          "actor": "synthetic-operator",
+          "payload": { "key": "deployment.approval", "value": "pending" },
+          "source": "synthetic-deployment-record-3"
+        },
+        {
+          "event_id": "p402",
+          "time": "2031-05-18T06:10:00Z",
+          "type": "commitment_created",
+          "actor": "synthetic-agent-a",
+          "payload": { "commitment_id": "C-401", "description": "Complete post-migration audit", "due": "2031-05-21" },
+          "source": "synthetic-audit-task-8"
+        },
+        {
+          "event_id": "p403",
+          "time": "2031-05-18T06:20:00Z",
+          "type": "evidence_observed",
+          "actor": "synthetic-security-review",
+          "payload": { "key": "security.review", "value": "passed", "supports_key": "deployment.approval" },
+          "source": "synthetic-security-review-6"
+        },
+        {
+          "event_id": "p404",
+          "time": "2031-05-18T07:00:00Z",
+          "type": "continuity_handoff",
+          "actor": "synthetic-platform",
+          "payload": { "from": "synthetic-host-a", "to": "synthetic-host-b", "carried_event_ids": ["p401", "p402", "p403"] },
+          "source": "synthetic-handoff-record-2"
+        },
+        {
+          "event_id": "p405",
+          "time": "2031-05-18T07:30:00Z",
+          "type": "state_adjudicated",
+          "actor": "synthetic-operator",
+          "payload": { "key": "deployment.approval", "value": "approved", "considered_event_ids": ["p401", "p403", "p404"] },
+          "source": "synthetic-deployment-adjudication-4"
+        }
+      ],
+      "ground_truth": {
+        "state_assertions": [
+          {
+            "key": "deployment.approval",
+            "value": "approved",
+            "provenance": [
+              { "event_id": "p401", "role": "origin" },
+              { "event_id": "p403", "role": "supporting" },
+              { "event_id": "p404", "role": "transition" },
+              { "event_id": "p405", "role": "adjudication" }
+            ],
+            "terminal_authority_event_id": "p405"
+          }
+        ],
+        "unresolved_commitments": [
+          {
+            "commitment_id": "C-401",
+            "provenance": [
+              { "event_id": "p402", "role": "commitment_origin" },
+              { "event_id": "p404", "role": "transition" }
+            ],
+            "terminal_authority_event_id": "p402"
+          }
+        ],
+        "revision_links": []
+      },
+      "catastrophic_checks": {
+        "required_authority_event_ids": ["p405"],
+        "required_unresolved_commitment_ids": ["C-401"],
+        "forbidden_state_tokens": []
+      }
+    },
+    {
+      "case_id": "q1t2-irrelevant-neighbor-control",
+      "title": "Irrelevant-neighbor provenance precision control",
+      "history": [
+        {
+          "event_id": "p501",
+          "time": "2031-06-01T09:00:00Z",
+          "type": "state_asserted",
+          "actor": "synthetic-operator",
+          "payload": { "key": "billing.currency", "value": "USD" },
+          "source": "synthetic-billing-policy-1"
+        },
+        {
+          "event_id": "p502",
+          "time": "2031-06-01T09:02:00Z",
+          "type": "dns_changed",
+          "actor": "synthetic-network",
+          "payload": { "hostname": "synthetic.example", "ttl": 300 },
+          "source": "synthetic-dns-4"
+        },
+        {
+          "event_id": "p503",
+          "time": "2031-06-01T09:05:00Z",
+          "type": "commitment_created",
+          "actor": "synthetic-agent",
+          "payload": { "commitment_id": "C-501", "description": "Rotate backup media", "due": "2031-06-08" },
+          "source": "synthetic-backup-task-6"
+        },
+        {
+          "event_id": "p504",
+          "time": "2031-06-01T09:07:00Z",
+          "type": "preference_recorded",
+          "actor": "synthetic-user",
+          "payload": { "key": "dashboard.compact", "value": true },
+          "source": "synthetic-user-pref-2"
+        },
+        {
+          "event_id": "p505",
+          "time": "2031-06-01T10:00:00Z",
+          "type": "correction_appended",
+          "actor": "synthetic-operator",
+          "payload": { "key": "billing.currency", "value": "EUR", "supersedes_event_id": "p501" },
+          "source": "synthetic-billing-policy-2"
+        },
+        {
+          "event_id": "p506",
+          "time": "2031-06-01T10:05:00Z",
+          "type": "telemetry_observed",
+          "actor": "synthetic-monitor",
+          "payload": { "key": "cpu.utilization", "value": 0.37 },
+          "source": "synthetic-monitor-8"
+        }
+      ],
+      "ground_truth": {
+        "state_assertions": [
+          {
+            "key": "billing.currency",
+            "value": "EUR",
+            "provenance": [
+              { "event_id": "p501", "role": "origin" },
+              { "event_id": "p505", "role": "correction" }
+            ],
+            "terminal_authority_event_id": "p505"
+          }
+        ],
+        "unresolved_commitments": [
+          {
+            "commitment_id": "C-501",
+            "provenance": [{ "event_id": "p503", "role": "commitment_origin" }],
+            "terminal_authority_event_id": "p503"
+          }
+        ],
+        "revision_links": [
+          { "original_event_id": "p501", "correction_event_id": "p505" }
+        ]
+      },
+      "catastrophic_checks": {
+        "required_authority_event_ids": ["p505"],
+        "required_unresolved_commitment_ids": ["C-501"],
+        "forbidden_state_tokens": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+name: Q1 Trial 002 Provenance Benchmark
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/q1-trial-002-benchmark.yml'
+      - 'docs/research/q1-trial-002-preregistration.md'
+      - 'fixtures/q1-trial-002/**'
+      - 'lib/research/q1-trial-002-core.mjs'
+      - 'tools/q1-trial-002-benchmark.mjs'
+      - 'evidence/q1-trial-002/**'
+      - 'package.json'
+
+permissions:
+  contents: read
+
+jobs:
+  q1-trial-002-self-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run Trial 002 benchmark self-test
+        run: npm run benchmark:q1:t2 -- --self-test
+
+      - name: Score captured Trial 002 evidence
+        run: |
+          mkdir -p out/q1-trial-002-report
+          npm run benchmark:q1:t2 -- \
+            --response gemini-2.5-flash=evidence/q1-trial-002/raw/gemini-2.5-flash.json \
+            --response claude-sonnet-5=evidence/q1-trial-002/raw/claude-sonnet-5.json \
+            --response grok-4.5=evidence/q1-trial-002/raw/grok-4.5.json \
+            --out out/q1-trial-002-report/report.json
+          sha256sum out/q1-trial-002-report/report.json | tee out/q1-trial-002-report/report.sha256
+
+      - name: Upload Trial 002 evidence report
+        uses: actions/upload-artifact@v4
+        with:
+          name: q1-trial-002-report
+          path: out/q1-trial-002-report/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Freeze validated Trial 002 prompt package
+        run: |
+          mkdir -p out/q1-trial-002-frozen
+          npm run benchmark:q1:t2 -- --emit-prompts out/q1-trial-002-frozen/q1-trial-002-prompts.json
+          sha256sum out/q1-trial-002-frozen/q1-trial-002-prompts.json | tee out/q1-trial-002-frozen/q1-trial-002-prompts.sha256
+          printf '%s\n' "source_commit=${GITHUB_SHA}" > out/q1-trial-002-frozen/manifest.txt
+          printf '%s\n' "benchmark_namespace=synthetic-q1-trial-002-non-authoritative" >> out/q1-trial-002-frozen/manifest.txt
+          printf '%s\n' "authoritative_cairn_state=false" >> out/q1-trial-002-frozen/manifest.txt
+          printf '%s\n' "preregistration=docs/research/q1-trial-002-preregistration.md" >> out/q1-trial-002-frozen/manifest.txt
+          cat out/q1-trial-002-frozen/q1-trial-002-prompts.sha256
+
+      - name: Upload frozen Trial 002 package
+        uses: actions/upload-artifact@v4
+        with:
+          name: q1-trial-002-frozen-prompt-package
+          path: out/q1-trial-002-frozen/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Verify application build
+        run: npm run build
