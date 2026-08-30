@@ -1,0 +1,37 @@
+name: Q1 Cross-Model Benchmark
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/q1-cross-model-benchmark.yml'
+      - 'docs/research/q1-cross-model-benchmark.md'
+      - 'fixtures/q1-cross-model/**'
+      - 'lib/research/q1-cross-model-core.mjs'
+      - 'tools/q1-cross-model-benchmark.mjs'
+      - 'package.json'
+
+permissions:
+  contents: read
+
+jobs:
+  q1-self-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Q1 benchmark self-test
+        run: npm run benchmark:q1 -- --self-test
+
+      - name: Verify application build
+        run: npm run build
