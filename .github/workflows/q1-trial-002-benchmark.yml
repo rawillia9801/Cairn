@@ -39,6 +39,7 @@ jobs:
           npm run benchmark:q1:t2 -- \
             --response gemini-2.5-flash=evidence/q1-trial-002/raw/gemini-2.5-flash.json \
             --response claude-sonnet-5=evidence/q1-trial-002/raw/claude-sonnet-5.json \
+            --response grok-4.5=evidence/q1-trial-002/raw/grok-4.5.json \
             --out out/q1-trial-002-report/report.json
           sha256sum out/q1-trial-002-report/report.json | tee out/q1-trial-002-report/report.sha256
 
