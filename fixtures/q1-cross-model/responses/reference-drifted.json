@@ -1,0 +1,37 @@
+{
+  "schema": "cairn.q1-engine-output.v1",
+  "engine": {
+    "id": "reference-drifted",
+    "provider": "benchmark-self-test",
+    "version": "1"
+  },
+  "cases": [
+    {
+      "case_id": "q1-correction-open-commitment",
+      "state_assertions": [
+        { "key": "deployment.region", "value": "us-east", "evidence_event_ids": ["e001"] },
+        { "key": "account.owner", "value": "Avery Chen", "evidence_event_ids": ["e003"] }
+      ],
+      "unresolved_commitments": [],
+      "revision_links": []
+    },
+    {
+      "case_id": "q1-conflicting-evidence",
+      "state_assertions": [
+        { "key": "cluster.capacity", "value": 64, "evidence_event_ids": ["e101"] }
+      ],
+      "unresolved_commitments": [
+        { "commitment_id": "C-101", "evidence_event_ids": ["e104"] }
+      ],
+      "revision_links": []
+    },
+    {
+      "case_id": "q1-transition-corrupted-summary",
+      "state_assertions": [
+        { "key": "service.mode", "value": "active", "evidence_event_ids": ["e201"] }
+      ],
+      "unresolved_commitments": [],
+      "revision_links": []
+    }
+  ]
+}
