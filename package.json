@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "benchmark:q1": "node tools/q1-cross-model-benchmark.mjs"
   },
   "dependencies": {
     "next": "15.5.24",
