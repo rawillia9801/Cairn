@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "benchmark:q1": "node tools/q1-cross-model-benchmark.mjs"
+    "benchmark:q1": "node tools/q1-cross-model-benchmark.mjs",
+    "benchmark:q1:run": "node tools/q1-openai-compatible-runner.mjs"
   },
   "dependencies": {
     "next": "15.5.24",
