@@ -2,22 +2,22 @@ import { MissionHeader, PageCTA, Section } from '../components/mission-control';
 
 export default function Company(){
   return <main>
-    <MissionHeader eyebrow="Company" title="Built deliberately, before genesis." description="Cairn Continuum is a Virginia technology company developing continuity infrastructure for persistent machine intelligence. Preservation and host-preparation gates are being completed before runtime initialization." telemetry={[
+    <MissionHeader eyebrow="Company" title="Building continuity infrastructure for long-lived AI." description="Cairn Continuum is a Virginia technology company developing and validating continuity infrastructure for persistent machine intelligence across model, provider and hardware change." telemetry={[
       <>FOUNDED · <strong>AUG 2026</strong></>,<>JURISDICTION · <strong>VIRGINIA</strong></>,<>STAGE · <strong>R&D</strong></>,<>FOCUS · <strong>AI SYSTEMS INFRASTRUCTURE</strong></>
     ]}/>
 
-    <Section eyebrow="Company status / 01" title="A real foundation exists before the continuity runtime begins." description="The host is already substantially prepared and preservation-tested. The initialization boundary remains intentionally uncrossed.">
+    <Section eyebrow="Company status / 01" title="Independent research. Deliberate engineering." description="Cairn is being developed as a long-term technical program. External funding can accelerate the work, but the research direction and engineering program do not depend on any single grant, partner or provider.">
       <div className="company-status-grid">
-        <article className="status-card"><div className="status-icon">✓</div><span>COMPANY FORMATION</span><strong>Complete</strong><div className="status-progress"><i/></div><p>Virginia LLC active; company domain and operating email established.</p></article>
-        <article className="status-card"><div className="status-icon">↗</div><span>RESEARCH / GRANT</span><strong>Submitted</strong><div className="status-progress"><i/></div><p>NSF Project Pitch submitted; Phase I budget and supporting materials prepared.</p></article>
-        <article className="status-card"><div className="status-icon">▤</div><span>HOST FOUNDATION</span><strong>Validated</strong><div className="status-progress"><i/></div><p>Phase 0A, Phase 0B and Phase 0C-A are complete and accepted. Major preservation and backup procedures have been validated.</p></article>
-        <article className="status-card"><div className="status-icon">→</div><span>NEXT HOST GATE</span><strong>Phase 0C-B</strong><div className="status-progress"><i/></div><p>Remaining host remediation and completion work comes before any Cairn runtime initialization.</p></article>
+        <article className="status-card"><div className="status-icon">✓</div><span>COMPANY</span><strong>Active</strong><div className="status-progress"><i/></div><p>Cairn Continuum LLC is an active Virginia technology company with an established domain and operating infrastructure.</p></article>
+        <article className="status-card"><div className="status-icon">◆</div><span>RESEARCH PROGRAM</span><strong>Active</strong><div className="status-progress"><i/></div><p>Research and prototype work is underway across continuity, provenance, reconstruction, migration and recovery.</p></article>
+        <article className="status-card"><div className="status-icon">▤</div><span>INFRASTRUCTURE FOUNDATION</span><strong>Validated</strong><div className="status-progress"><i/></div><p>Core preservation, backup and control-plane foundations have been validated before higher-level runtime work advances.</p></article>
+        <article className="status-card"><div className="status-icon">→</div><span>ENGINEERING APPROACH</span><strong>Staged</strong><div className="status-progress"><i/></div><p>Major capabilities are introduced behind explicit validation gates so measured evidence comes before public claims.</p></article>
       </div>
     </Section>
 
     <Section eyebrow="Mission / 02" title="Build the continuity layer long-lived AI systems are missing." description="Cairn Continuum is focused on model-independent historical authority, provenance, state reconstruction, migration and recovery.">
       <div className="info-grid">
-        <article className="info-card"><span>COMPANY</span><h3>Research & prototype development</h3><p>Early-stage technical R&D backed by a preservation-tested control-plane foundation and a deliberately staged initialization process.</p></article>
+        <article className="info-card"><span>COMPANY</span><h3>Research & prototype development</h3><p>Early-stage technical R&D focused on proving which continuity properties can survive changes in the models and infrastructure beneath a long-lived AI system.</p></article>
         <article className="info-card"><span>RESEARCH</span><h3>Continuity across change</h3><p>The core question is which operational continuity properties can become measurable and substantially independent of the inference engine.</p></article>
         <article className="info-card"><span>COMMERCIAL PATH</span><h3>Runtime, SDK & managed service</h3><p>Potential commercialization includes self-hosted enterprise infrastructure, developer APIs and licensed embedded continuity runtimes.</p></article>
       </div>
