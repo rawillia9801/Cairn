@@ -8,6 +8,7 @@ on:
       - 'fixtures/q1-trial-002/**'
       - 'lib/research/q1-trial-002-core.mjs'
       - 'tools/q1-trial-002-benchmark.mjs'
+      - 'evidence/q1-trial-002/**'
       - 'package.json'
 
 permissions:
@@ -31,6 +32,23 @@ jobs:
 
       - name: Run Trial 002 benchmark self-test
         run: npm run benchmark:q1:t2 -- --self-test
+
+      - name: Score captured Trial 002 evidence
+        run: |
+          mkdir -p out/q1-trial-002-report
+          npm run benchmark:q1:t2 -- \
+            --response gemini-2.5-flash=evidence/q1-trial-002/raw/gemini-2.5-flash.json \
+            --response claude-sonnet-5=evidence/q1-trial-002/raw/claude-sonnet-5.json \
+            --out out/q1-trial-002-report/report.json
+          sha256sum out/q1-trial-002-report/report.json | tee out/q1-trial-002-report/report.sha256
+
+      - name: Upload Trial 002 evidence report
+        uses: actions/upload-artifact@v4
+        with:
+          name: q1-trial-002-report
+          path: out/q1-trial-002-report/
+          if-no-files-found: error
+          retention-days: 90
 
       - name: Freeze validated Trial 002 prompt package
         run: |
