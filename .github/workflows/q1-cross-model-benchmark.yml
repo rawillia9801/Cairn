@@ -32,5 +32,23 @@ jobs:
       - name: Run Q1 benchmark self-test
         run: npm run benchmark:q1 -- --self-test
 
+      - name: Freeze validated Q1 prompt package
+        run: |
+          mkdir -p out/q1-frozen
+          npm run benchmark:q1 -- --emit-prompts out/q1-frozen/q1-prompts.json
+          sha256sum out/q1-frozen/q1-prompts.json | tee out/q1-frozen/q1-prompts.sha256
+          printf '%s\n' "source_commit=${GITHUB_SHA}" > out/q1-frozen/manifest.txt
+          printf '%s\n' "benchmark_namespace=synthetic-q1-non-authoritative" >> out/q1-frozen/manifest.txt
+          printf '%s\n' "authoritative_cairn_state=false" >> out/q1-frozen/manifest.txt
+          cat out/q1-frozen/q1-prompts.sha256
+
+      - name: Upload frozen Q1 package
+        uses: actions/upload-artifact@v4
+        with:
+          name: q1-frozen-prompt-package
+          path: out/q1-frozen/
+          if-no-files-found: error
+          retention-days: 90
+
       - name: Verify application build
         run: npm run build
