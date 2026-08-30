@@ -14,7 +14,7 @@ export default function Research(){
       <>MODEL CHANGE · <strong>TEST</strong></>,<>HOST MIGRATION · <strong>TEST</strong></>,<>MEMORY CORRUPTION · <strong>TEST</strong></>,<>TAMPER DETECTION · <strong>TEST</strong></>
     ]}/>
     <Section eyebrow="Technical objectives / 01" title="We are testing the boundary, not assuming the answer." description="Preserving bytes is not enough. The research is designed to identify which continuity guarantees can be deterministic at the systems layer and which remain model-dependent.">
-      <div className="architecture-panel"><div className="panel-bar"><span>PHASE I OBJECTIVE BOARD</span><b>● ACTIVE PROGRAM</b></div><div className="architecture-grid">
+      <div className="architecture-panel"><div className="panel-bar"><span>RESEARCH OBJECTIVE BOARD</span><b>● ACTIVE PROGRAM</b></div><div className="architecture-grid">
         {objectives.map(([n,t,p])=><article key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}
         <article><span>RISK</span><h3>Behavioral continuity</h3><p>State preservation may be perfect while model interpretation still changes materially. That boundary must be quantified.</p></article>
       </div></div>
