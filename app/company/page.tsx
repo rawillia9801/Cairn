@@ -2,51 +2,51 @@ import { MissionHeader, PageCTA, Section } from '../components/mission-control';
 
 export default function Company(){
   return <main>
-    <MissionHeader eyebrow="Company" title="AI should be able to change without losing its history." description="Cairn Continuum began from a simple concern: increasingly capable AI systems may outlive the models, providers and machines beneath them. We are building the continuity layer that could let those systems improve, move and recover without silently starting over." telemetry={[
+    <MissionHeader eyebrow="Company" title="AI should be able to change without losing its history." description="Cairn Continuum started with one simple question: what happens when an AI system lasts longer than the model, provider or machine running it? We are building a continuity layer so those systems can improve, move and recover without losing their past." telemetry={[
       <>FOUNDED · <strong>AUG 2026</strong></>,<>BASE · <strong>VIRGINIA</strong></>,<>TODAY · <strong>RESEARCH + PROTOTYPING</strong></>,<>DIRECTION · <strong>MODEL-INDEPENDENT CONTINUITY</strong></>
     ]}/>
 
-    <Section eyebrow="Why this path / 01" title="The intelligence will change. The history should not disappear with it." description="AI systems are moving from short-lived sessions toward long-running agents that accumulate decisions, obligations, evidence and operational context. The infrastructure underneath them is far less permanent.">
+    <Section eyebrow="Why this matters / 01" title="The technology underneath AI will keep changing." description="AI systems are beginning to work for longer periods of time. The models and machines underneath them will not stay the same forever.">
       <div className="info-grid">
-        <article className="info-card"><span>THE SHIFT</span><h3>Systems are becoming long-lived</h3><p>An AI that works across months or years can accumulate unfinished work, exceptions, decisions, relationships and evidence that matter beyond a single session.</p></article>
-        <article className="info-card"><span>THE INSTABILITY</span><h3>Models and infrastructure are temporary</h3><p>Models improve. Providers change. Hardware fails. Hosts move. A durable system cannot assume that the cognition engine operating today will still exist tomorrow.</p></article>
-        <article className="info-card"><span>THE IDEA</span><h3>History needs its own authority</h3><p>Cairn separates preserved operational history from the replaceable model interpreting it, so new understanding can be added without silently rewriting what actually happened.</p></article>
+        <article className="info-card"><span>THE SHIFT</span><h3>AI systems are becoming long-lived</h3><p>A system that works for months or years can build up unfinished work, decisions, exceptions, relationships and evidence that still matter later.</p></article>
+        <article className="info-card"><span>THE PROBLEM</span><h3>The model will eventually change</h3><p>Models improve. Providers change. Hardware fails. A system that lasts cannot assume the same AI model will always be there.</p></article>
+        <article className="info-card"><span>THE IDEA</span><h3>Keep the history outside the model</h3><p>Cairn keeps the operational history separate from the model reading it, so a new model can pick up from the same record instead of starting from a blank slate.</p></article>
       </div>
     </Section>
 
-    <Section eyebrow="Today / 02" title="First, prove what continuity can actually survive." description="The work today is intentionally narrow and measurable: determine which properties can remain stable across changes in cognition and infrastructure, and quantify where that stability breaks down.">
+    <Section eyebrow="What we are doing now / 02" title="First, prove what actually works." description="We are testing the hard parts before treating them as solved: can history survive a model change, can recovery be trusted, and where do the limits show up?">
       <div className="company-status-grid">
-        <article className="status-card"><div className="status-icon">◆</div><span>HISTORY + PROVENANCE</span><strong>Under test</strong><div className="status-progress"><i/></div><p>Append-only history, content-addressed originals and provenance links are being designed so evidence can remain attributable across system change.</p></article>
-        <article className="status-card"><div className="status-icon">⇄</div><span>CROSS-MODEL RECOVERY</span><strong>Active benchmark</strong><div className="status-progress"><i/></div><p>A working benchmark harness measures whether different cognition engines can recover the same authoritative state, unresolved commitments and revision history from an identical preserved baseline.</p></article>
-        <article className="status-card"><div className="status-icon">▤</div><span>RECONSTRUCTION</span><strong>Under test</strong><div className="status-progress"><i/></div><p>Recovery is being evaluated under host changes, corrupted derived memory, provider loss and deliberate historical tampering.</p></article>
-        <article className="status-card"><div className="status-icon">✓</div><span>CLAIM DISCIPLINE</span><strong>Evidence first</strong><div className="status-progress"><i/></div><p>The objective is not to assume continuity works. It is to establish what can be demonstrated, what remains model-dependent and what fails.</p></article>
+        <article className="status-card"><div className="status-icon">◆</div><span>HISTORY + SOURCES</span><strong>Under test</strong><div className="status-progress"><i/></div><p>We are testing ways to keep original records and the sources behind important state changes intact over time.</p></article>
+        <article className="status-card"><div className="status-icon">⇄</div><span>CROSS-MODEL RECOVERY</span><strong>Active benchmark</strong><div className="status-progress"><i/></div><p>We test whether different AI models can rebuild the same working state, unfinished commitments and revision history from the same preserved record.</p></article>
+        <article className="status-card"><div className="status-icon">▤</div><span>RECOVERY</span><strong>Under test</strong><div className="status-progress"><i/></div><p>We test recovery after provider changes, machine changes, damaged summaries and deliberate history tampering.</p></article>
+        <article className="status-card"><div className="status-icon">✓</div><span>RESULTS</span><strong>Evidence first</strong><div className="status-progress"><i/></div><p>If a test works, we say what it showed. If it fails or only partly works, we keep that result too.</p></article>
       </div>
     </Section>
 
-    <Section eyebrow="Tomorrow / 03" title="A continuity substrate that can travel with the system." description="If the research holds, Cairn could become infrastructure beneath many kinds of AI systems rather than a feature tied to one model, vendor or interface.">
+    <Section eyebrow="Where this could go / 03" title="A continuity layer that can move with the system." description="If the research continues to hold up, Cairn could sit underneath many kinds of AI systems instead of belonging to one model, vendor or product.">
       <div className="info-grid">
-        <article className="info-card"><span>MODEL INDEPENDENCE</span><h3>Change the cognition engine</h3><p>A stronger or more appropriate model could replace the current one while reconstructing from a verified historical baseline instead of beginning from a blank operational state.</p></article>
-        <article className="info-card"><span>INFRASTRUCTURE INDEPENDENCE</span><h3>Move without starting over</h3><p>A portable, model-neutral event and provenance schema—combined with content-addressed originals and verified checkpoints—is the path being explored for carrying continuity across providers, hosts and hardware without silently resetting operational history.</p></article>
-        <article className="info-card"><span>LONGER HORIZON</span><h3>Continuity beyond one interface</h3><p>The same continuity foundation could eventually support enterprise agents, developer systems, robotics and other long-lived forms of machine intelligence as their capabilities and physical interfaces evolve.</p></article>
+        <article className="info-card"><span>CHANGE THE MODEL</span><h3>Upgrade without losing the past</h3><p>A better model could replace the current one and resume from a verified history instead of beginning again.</p></article>
+        <article className="info-card"><span>MOVE THE SYSTEM</span><h3>Change providers or hardware</h3><p>The history and recovery process are being designed to travel across providers, hosts and hardware without silently resetting the system.</p></article>
+        <article className="info-card"><span>LONGER TERM</span><h3>Use the same idea beyond one interface</h3><p>The same foundation could eventually support business agents, developer tools, robotics and other AI systems that need to last.</p></article>
       </div>
     </Section>
 
-    <Section eyebrow="What we want to achieve / 04" title="Persistent intelligence that does not silently start over." description="The long-term goal is not to freeze an AI system in place. It is to let the system change while preserving a trustworthy path back to its own operational history.">
+    <Section eyebrow="The goal / 04" title="Let AI improve without making it forget its own past." description="Cairn is not about keeping one model alive forever. It is about preserving a trustworthy record when the model changes.">
       <div className="info-grid">
-        <article className="info-card"><span>VERIFIABLE CONTINUITY</span><h3>Know what actually happened</h3><p>Preserve original evidence, sequence, provenance and revisions so recovery starts from attributable history rather than an untraceable summary.</p></article>
-        <article className="info-card"><span>PORTABLE CONTINUITY</span><h3>Reduce dependence on one model or vendor</h3><p>Make historical state and recovery semantics portable enough that a long-lived system is not forced to lose its operational past when technology underneath it changes.</p></article>
-        <article className="info-card"><span>ACCOUNTABLE AUTONOMY</span><h3>Let capability grow with evidence</h3><p>As AI systems become more capable, provide the provenance, recovery and auditability needed to understand actions and preserve responsibility without treating permanent centralized control as the only form of safety.</p></article>
+        <article className="info-card"><span>TRUSTED HISTORY</span><h3>Know what actually happened</h3><p>Keep the original records, their order and their sources so recovery is based on evidence instead of a summary that may have changed.</p></article>
+        <article className="info-card"><span>PORTABLE HISTORY</span><h3>Depend less on one vendor</h3><p>Make the system's past portable enough that changing the technology underneath it does not mean losing years of work.</p></article>
+        <article className="info-card"><span>ACCOUNTABILITY</span><h3>Keep a record of important actions</h3><p>As AI systems become more capable, preserve enough evidence to understand what they did, why it happened and what still needs attention.</p></article>
       </div>
     </Section>
 
-    <Section eyebrow="Founding team / 05" title="Small team. Long horizon." description="Cairn Continuum is being built as an independent research and engineering company with a systems-first approach and a deliberately long-term view of persistent machine intelligence.">
+    <Section eyebrow="Founding team / 05" title="Small team. Long horizon." description="Cairn Continuum is being built as an independent research and engineering company focused on a problem we expect to matter more as AI systems become longer-lived.">
       <div className="info-grid">
         <article className="info-card"><span>FOUNDER / TECHNICAL LEAD</span><h3>Robert Williams</h3><p>Hands-on experience across production web applications, multi-tenant SaaS, AI-enabled voice services, Linux/VPS infrastructure, telephony, databases, authentication, API integrations and cloud deployment.</p></article>
-        <article className="info-card"><span>CO-FOUNDER / BUSINESS OPERATIONS</span><h3>Cristy Rambo-Smith</h3><p>Business operations, company administration and execution support as Cairn’s research, infrastructure and commercial foundation expand.</p></article>
-        <article className="info-card"><span>GROWING THE TEAM</span><h3>Independent evaluation & security</h3><p>As the research program expands, Cairn plans to add ML evaluation and security/cryptography expertise for benchmark design, threat modeling, key management and tamper-evidence review.</p></article>
+        <article className="info-card"><span>CO-FOUNDER / BUSINESS OPERATIONS</span><h3>Cristy Rambo-Smith</h3><p>Business operations, company administration and execution support as Cairn's research, infrastructure and commercial foundation expand.</p></article>
+        <article className="info-card"><span>GROWING THE TEAM</span><h3>Independent evaluation & security</h3><p>As the research grows, Cairn plans to add outside evaluation and security expertise to challenge the design and test the parts that need independent review.</p></article>
       </div>
     </Section>
 
-    <PageCTA title="Interested in the research, the architecture or where this could go?" href="/contact" label="Contact Cairn"/>
+    <PageCTA title="Interested in the research, the technology or where this could go?" href="/contact" label="Contact Cairn"/>
   </main>;
 }
