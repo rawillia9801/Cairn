@@ -14,11 +14,11 @@ export default function WhyContinuity(){
       <>SESSION MEMORY · <strong>TEMPORARY</strong></>,<>RETRIEVAL · <strong>PARTIAL</strong></>,<>HISTORY · <strong>PRESERVED</strong></>,<>RECOVERY · <strong>TESTABLE</strong></>
     ]}/>
 
-    <Section eyebrow="Imagine this / 01" title="Imagine an AI system that stays with you for decades." description="Over that time, models will change. Providers will change. Hardware will fail and be replaced. The system may move, upgrade and recover many times. Its history, decisions, unfinished work and commitments should not disappear when the technology underneath it changes.">
+    <Section eyebrow="Imagine this / 01" title="An AI system stays with you for decades." description="Over that time, models change, providers change, hardware is replaced and failures eventually happen. The question is whether the system can still pick up from a trustworthy past without starting over.">
       <div className="continuity-timeline">
         {timeline.map(([n,title,text,q,a]) => <article className="timeline-stop" key={n}>
           <div className="time-node">{n}</div>
-          <span>STAGE {n}</span>
+          <span>{`STAGE ${n}`}</span>
           <h3>{title}</h3>
           <p>{text}</p>
           <div className="timeline-question"><small>KEY QUESTION</small><b>{q}</b><p>{a}</p></div>
