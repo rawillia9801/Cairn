@@ -41,21 +41,21 @@ export default function Research(){
       ].map(([n,t,p])=><article className="info-card" key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}</div>
     </Section>
 
-    <Section eyebrow="Validated evidence / 04" title="Some of the questions now have measured answers." description="These are controlled synthetic research results, not production service-level claims. The complete preregistrations, raw evidence provenance, limitations and reproducible benchmark records remain in the public repository.">
+    <Section eyebrow="Validated evidence / 04" title="Some of the questions now have measured answers." description="These are controlled synthetic research results, not production service-level claims. Public result pages summarize the measured findings, test conditions and limitations while the detailed reproducibility record remains maintained as project evidence.">
       <div className="info-grid">
         <article className="info-card">
           <span>Q1 · SUPPORTED</span>
           <h3>Cross-model operational continuity</h3>
           <p>Trial 001 found that two materially different cognition-engine families reconstructed the same predefined authoritative state, unresolved commitments, revisions and resumption baseline with zero unsupported state claims and zero pairwise interpretation divergence. A provenance shortfall was preserved rather than corrected after the fact.</p>
           <p>Trial 002 then tested minimum-sufficient provenance portability. Claude and Grok met every preregistered engine-level target with zero pairwise provenance-set divergence; Gemini remains in the evidence record as a partial result.</p>
-          <p><a href="https://github.com/rawillia9801/Cairn/blob/main/docs/research/q1-trial-001-results.md" target="_blank" rel="noreferrer">Trial 001 evidence ↗</a> · <a href="https://github.com/rawillia9801/Cairn/blob/main/docs/research/q1-trial-002-results.md" target="_blank" rel="noreferrer">Trial 002 evidence ↗</a></p>
+          <p><Link href="/research/results#q1-trial-001">Trial 001 results →</Link> · <Link href="/research/results#q1-trial-002">Trial 002 results →</Link></p>
         </article>
 
         <article className="info-card">
           <span>Q2 · TRIAL 001 SUPPORTED</span>
           <h3>Bounded multi-year reconstruction</h3>
           <p>At one million lifetime events, verified checkpoint recovery reconstructed the same authoritative baseline while replaying a 10,000-event tail instead of one million events. Dependency-aware recovery applied only 232 relevant events. Deliberate checkpoint, dependency-index and protected-history corruption produced zero silent false-verification outcomes.</p>
-          <p><a href="https://github.com/rawillia9801/Cairn/blob/main/docs/research/q2-trial-001-results.md" target="_blank" rel="noreferrer">Trial 001 evidence ↗</a></p>
+          <p><Link href="/research/results#q2-trial-001">View Trial 001 results →</Link></p>
         </article>
 
         <article className="info-card">
@@ -63,13 +63,14 @@ export default function Research(){
           <h3>Fixed-age recovery stayed effectively flat</h3>
           <p>Trial 002 held checkpoint age at exactly 10,000 events while lifetime history increased from 100,000 to 1,000,000 events. Full verified replay P50 grew from 679.994 ms to 6,811.583 ms, while fixed-age checkpoint recovery remained 73.733 ms versus 73.741 ms — a preregistered latency ratio of 1.0001.</p>
           <p>The fixed-work, integrity and latency-stability targets all passed. The ordinary recovery algorithm performed zero pre-checkpoint event-body reads at both required scales.</p>
-          <p><a href="https://github.com/rawillia9801/Cairn/blob/main/docs/research/q2-trial-002-results.md" target="_blank" rel="noreferrer">Trial 002 evidence ↗</a></p>
+          <p><Link href="/research/results#q2-trial-002">View Trial 002 results →</Link></p>
         </article>
 
         <article className="info-card">
           <span>Q3 · NEXT</span>
           <h3>Structured provenance versus brute-force long context</h3>
           <p>Q3 remains an open validation question. It will compare structured provenance and recovery against long-context history under controlled migration, corruption and recovery conditions rather than assuming that either approach is superior.</p>
+          <p><Link href="/research/results">View the current evidence record →</Link></p>
         </article>
       </div>
     </Section>
@@ -88,6 +89,6 @@ export default function Research(){
       </Link>
     </Section>
 
-    <PageCTA title="See where persistent continuity becomes operationally valuable." href="/applications" label="Applications"/>
+    <PageCTA title="Read the current validated research results." href="/research/results" label="Research Results"/>
   </main>;
 }
