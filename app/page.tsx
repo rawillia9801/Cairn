@@ -87,7 +87,7 @@ export default function HomePage(){
       <div className="chapter-copy">
         <div className="story-overline"><span/> THE RECORD BEGINS</div>
         <h2>The system starts building a history.</h2>
-        <p className="chapter-lead">Not a human life — a record of the work it has done.</p>
+        <p className="chapter-lead">A growing record of what the system has done, decided, and still needs to finish.</p>
         <p>It learns how a business works. It makes decisions. It records exceptions. It starts tasks that will not finish today. It makes commitments that still matter tomorrow. It keeps the evidence behind those decisions and carries forward work that is not finished yet.</p>
         <p>At first, this seems simple while the same model and infrastructure are still running.</p>
       </div>
