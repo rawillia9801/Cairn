@@ -9,7 +9,8 @@
     "benchmark:q1": "node tools/q1-cross-model-benchmark.mjs",
     "benchmark:q1:run": "node tools/q1-openai-compatible-runner.mjs",
     "benchmark:q1:t2": "node tools/q1-trial-002-benchmark.mjs",
-    "benchmark:q2": "node tools/q2-reconstruction-benchmark.mjs"
+    "benchmark:q2": "node tools/q2-reconstruction-benchmark.mjs",
+    "benchmark:q2:t2": "node tools/q2-fixed-age-benchmark.mjs"
   },
   "dependencies": {
     "next": "15.5.24",

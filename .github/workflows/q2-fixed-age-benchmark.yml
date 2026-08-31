@@ -1,0 +1,65 @@
+name: Q2 Trial 002 Fixed-Age Scaling Benchmark
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/q2-fixed-age-benchmark.yml'
+      - 'docs/research/q2-trial-002-preregistration.md'
+      - 'lib/research/q2-reconstruction-core.mjs'
+      - 'tools/q2-fixed-age-benchmark.mjs'
+      - 'package.json'
+
+permissions:
+  contents: read
+
+jobs:
+  q2-fixed-age:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run Q2 Trial 002 fixed-age self-test
+        run: npm run benchmark:q2:t2 -- --self-test --workdir out/q2-trial-002-self-test
+
+      - name: Run preregistered 100K to 1M fixed-age scale ladder
+        run: |
+          mkdir -p out/q2-trial-002-report
+          npm run benchmark:q2:t2 -- \
+            --sizes 100000,1000000 \
+            --fixed-age 10000 \
+            --repetitions 5 \
+            --seed 20260831 \
+            --workdir out/q2-trial-002-work \
+            --out out/q2-trial-002-report/report.json
+          sha256sum out/q2-trial-002-report/report.json | tee out/q2-trial-002-report/report.sha256
+          printf '%s\n' "source_commit=${GITHUB_SHA}" > out/q2-trial-002-report/manifest.txt
+          printf '%s\n' "benchmark_namespace=synthetic-q2-trial-002-fixed-age-non-authoritative" >> out/q2-trial-002-report/manifest.txt
+          printf '%s\n' "source_workload_namespace=synthetic-q2-trial-001-non-authoritative" >> out/q2-trial-002-report/manifest.txt
+          printf '%s\n' "authoritative_cairn_state=false" >> out/q2-trial-002-report/manifest.txt
+          printf '%s\n' "preregistration=docs/research/q2-trial-002-preregistration.md" >> out/q2-trial-002-report/manifest.txt
+          printf '%s\n' "sizes=100000,1000000" >> out/q2-trial-002-report/manifest.txt
+          printf '%s\n' "fixed_age_events=10000" >> out/q2-trial-002-report/manifest.txt
+          printf '%s\n' "repetitions=5" >> out/q2-trial-002-report/manifest.txt
+          cat out/q2-trial-002-report/report.sha256
+
+      - name: Upload Q2 Trial 002 evidence report
+        uses: actions/upload-artifact@v4
+        with:
+          name: q2-trial-002-fixed-age-report
+          path: out/q2-trial-002-report/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Verify application build
+        run: npm run build
