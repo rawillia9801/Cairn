@@ -10,15 +10,15 @@ const timeline = [
 
 export default function WhyContinuity(){
   return <main>
-    <MissionHeader eyebrow="Why Continuity" title="Memory is useful. Continuity is bigger." description="For a short chat, remembering recent context may be enough. For an AI system expected to work for years, it is not." telemetry={[
+    <MissionHeader eyebrow="Why Continuity" title="Memory is useful. Continuity is bigger." description="For a short chat, remembering recent context may be enough. For an AI system expected to work for years or decades, it is not." telemetry={[
       <>SESSION MEMORY · <strong>TEMPORARY</strong></>,<>RETRIEVAL · <strong>PARTIAL</strong></>,<>HISTORY · <strong>PRESERVED</strong></>,<>RECOVERY · <strong>TESTABLE</strong></>
     ]}/>
 
-    <Section eyebrow="Imagine this / 01" title="An AI system works with you for five years." description="During those five years, the model changes, the provider changes, the machine changes and eventually something has to be recovered. The question is whether the system can still pick up from a trustworthy past.">
+    <Section eyebrow="Imagine this / 01" title="Imagine an AI system that stays with you for decades." description="Over that time, models will change. Providers will change. Hardware will fail and be replaced. The system may move, upgrade and recover many times. Its history, decisions, unfinished work and commitments should not disappear when the technology underneath it changes.">
       <div className="continuity-timeline">
         {timeline.map(([n,title,text,q,a]) => <article className="timeline-stop" key={n}>
           <div className="time-node">{n}</div>
-          <span>{n === '01' ? 'YEAR 1' : n === '05' ? 'YEAR 5+' : `YEAR ${n}`}</span>
+          <span>STAGE {n}</span>
           <h3>{title}</h3>
           <p>{text}</p>
           <div className="timeline-question"><small>KEY QUESTION</small><b>{q}</b><p>{a}</p></div>
