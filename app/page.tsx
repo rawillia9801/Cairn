@@ -85,11 +85,11 @@ export default function HomePage(){
     <section className="story-chapter" id="story-begins">
       <div className="chapter-number">01</div>
       <div className="chapter-copy">
-        <div className="story-overline"><span/> YEAR ONE</div>
+        <div className="story-overline"><span/> THE RECORD BEGINS</div>
         <h2>The system starts building a history.</h2>
         <p className="chapter-lead">Not a human life — a record of the work it has done.</p>
         <p>It learns how a business works. It makes decisions. It records exceptions. It starts tasks that will not finish today. It makes commitments that still matter tomorrow. It keeps the evidence behind those decisions and carries forward work that is not finished yet.</p>
-        <p>At first, this seems simple because the same model and the same infrastructure are still running.</p>
+        <p>At first, this seems simple while the same model and infrastructure are still running.</p>
       </div>
       <aside className="chapter-aside">
         <span>THE RECORD GROWS</span>
@@ -109,10 +109,10 @@ export default function HomePage(){
         <p>That is normal. Models improve. Providers change. Hardware gets replaced. Systems move.</p>
       </div>
       <div className="change-sequence">
-        <article><span>YEAR 02</span><b>Model upgrade</b><p>A stronger model replaces the original.</p></article>
-        <article><span>YEAR 03</span><b>Provider move</b><p>The system moves to a different AI provider.</p></article>
-        <article><span>YEAR 04</span><b>New hardware</b><p>Compute moves to a different machine or environment.</p></article>
-        <article><span>YEAR 05</span><b>Recovery</b><p>A failure forces the system to rebuild its working state.</p></article>
+        <article><span>TRANSITION 01</span><b>Model upgrade</b><p>A stronger model replaces the original.</p></article>
+        <article><span>TRANSITION 02</span><b>Provider move</b><p>The system moves to a different AI provider.</p></article>
+        <article><span>TRANSITION 03</span><b>New hardware</b><p>Compute moves to a different machine or environment.</p></article>
+        <article><span>TRANSITION 04</span><b>Recovery</b><p>A failure forces the system to rebuild its working state.</p></article>
       </div>
     </section>
 
