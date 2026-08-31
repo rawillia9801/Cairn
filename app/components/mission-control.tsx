@@ -44,33 +44,33 @@ export function Section({ eyebrow, title, description, children, className = '' 
 
 export function ArchitectureFlow() {
   const services = [
-    ['01','Append-only history','Original events remain immutable and time-ordered. New understanding is appended, never silently substituted.'],
-    ['02','Provenance','Claims remain traceable to sources, actors, models, versions and time.'],
-    ['03','Content-addressed originals','Original artifacts remain independently addressable by cryptographic content identity.'],
-    ['04','State reconstruction','Authoritative state is rebuilt from verified evidence rather than trusted mutable summaries.'],
-    ['05','Verifiable checkpoints','Recovery points can be cryptographically validated before resume, migration or rollback.'],
-    ['06','Recovery & transition','A replacement cognition engine can resume without state loss or forced imitation of old outputs.'],
+    ['01','Preserved event history','Important events stay in order. New information is added instead of silently replacing the old record.'],
+    ['02','Source tracing','Important claims can point back to where they came from, who or what created them, and when.'],
+    ['03','Original records preserved','Original files and artifacts remain independently available instead of being replaced by summaries.'],
+    ['04','Rebuild current state','The system can rebuild what is true now from verified history instead of trusting a mutable summary.'],
+    ['05','Verified checkpoints','Recovery points can be checked before the system resumes after a move, failure or restore.'],
+    ['06','Model change & recovery','A replacement AI model can resume from the same trusted history without having to copy the old model word for word.'],
   ];
   const persistence = [
-    ['Immutable persistence','History cannot be silently overwritten.'],
-    ['Cryptographic integrity','Objects and checkpoints can be hashed, linked and verified.'],
-    ['Portable recovery','Verified state can move across hosts and providers.'],
-    ['Operational resilience','The system is designed for failure, restoration and long-term change.'],
+    ['History cannot be silently overwritten','The original record stays intact.'],
+    ['Integrity can be checked','Important objects and checkpoints can be verified for unexpected changes.'],
+    ['Recovery can move','Trusted state can be carried across hosts and providers.'],
+    ['Failure is part of the design','The system is built with restoration and long-term change in mind.'],
   ];
 
   return <div className="tech-architecture">
-    <div className="tech-bar"><span>CAIRN / REFERENCE ARCHITECTURE</span><b>● CONTINUITY SUBSTRATE NOMINAL</b></div>
-    <div className="tech-layer-label">Replaceable cognition layer</div>
+    <div className="tech-bar"><span>CAIRN / REFERENCE ARCHITECTURE</span><b>● CONTINUITY LAYER ONLINE</b></div>
+    <div className="tech-layer-label">AI model layer</div>
     <div className="tech-cognition">
-      <div className="tech-engine"><span>COGNITION ENGINE A</span><strong>Model / Provider / Host A</strong></div>
+      <div className="tech-engine"><span>MODEL A</span><strong>Current model / provider / host</strong></div>
       <div className="tech-arrow">→</div>
-      <div className="tech-core"><span>AUTHORITATIVE CONTINUITY LAYER</span><strong>CAIRN CONTINUITY</strong><small>Independent of any single model</small></div>
+      <div className="tech-core"><span>TRUSTED HISTORY + RECOVERY</span><strong>CAIRN CONTINUITY</strong><small>Kept separate from any one model</small></div>
       <div className="tech-arrow">→</div>
-      <div className="tech-engine"><span>COGNITION ENGINE B</span><strong>Replacement / Upgrade</strong></div>
+      <div className="tech-engine"><span>MODEL B</span><strong>Replacement / upgrade</strong></div>
     </div>
-    <div className="tech-layer-label">Continuity services</div>
+    <div className="tech-layer-label">What Cairn keeps</div>
     <div className="tech-services">{services.map(([n,t,p]) => <article className="tech-service" key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}</div>
-    <div className="tech-layer-label">Verified persistence</div>
+    <div className="tech-layer-label">What that enables</div>
     <div className="tech-persistence">{persistence.map(([t,p]) => <article key={t}><b><i/>{t}</b><p>{p}</p></article>)}</div>
   </div>;
 }
