@@ -1,0 +1,63 @@
+name: Q2 Multi-Year Reconstruction Benchmark
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/q2-reconstruction-benchmark.yml'
+      - 'docs/research/q2-trial-001-preregistration.md'
+      - 'docs/research/q2-trial-001-results.md'
+      - 'lib/research/q2-reconstruction-core.mjs'
+      - 'tools/q2-reconstruction-benchmark.mjs'
+      - 'package.json'
+
+permissions:
+  contents: read
+
+jobs:
+  q2-reconstruction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run Q2 correctness and corruption self-test
+        run: npm run benchmark:q2 -- --self-test --workdir out/q2-self-test
+
+      - name: Run preregistered 10K to 1M reconstruction scale ladder
+        run: |
+          mkdir -p out/q2-trial-001-report
+          npm run benchmark:q2 -- \
+            --sizes 10000,100000,1000000 \
+            --repetitions 5 \
+            --seed 20260831 \
+            --workdir out/q2-trial-001-work \
+            --out out/q2-trial-001-report/report.json
+          sha256sum out/q2-trial-001-report/report.json | tee out/q2-trial-001-report/report.sha256
+          printf '%s\n' "source_commit=${GITHUB_SHA}" > out/q2-trial-001-report/manifest.txt
+          printf '%s\n' "benchmark_namespace=synthetic-q2-trial-001-non-authoritative" >> out/q2-trial-001-report/manifest.txt
+          printf '%s\n' "authoritative_cairn_state=false" >> out/q2-trial-001-report/manifest.txt
+          printf '%s\n' "preregistration=docs/research/q2-trial-001-preregistration.md" >> out/q2-trial-001-report/manifest.txt
+          printf '%s\n' "sizes=10000,100000,1000000" >> out/q2-trial-001-report/manifest.txt
+          printf '%s\n' "repetitions=5" >> out/q2-trial-001-report/manifest.txt
+          cat out/q2-trial-001-report/report.sha256
+
+      - name: Upload Q2 Trial 001 evidence report
+        uses: actions/upload-artifact@v4
+        with:
+          name: q2-trial-001-report
+          path: out/q2-trial-001-report/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Verify application build
+        run: npm run build
