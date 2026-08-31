@@ -68,12 +68,12 @@ function selectFixedAgePolicy(manifestContent, fixedAge) {
   }
 
   const candidates = manifestContent.checkpoint_policies.filter((policy) =>
-    policy.checkpoints.some((checkpoint) => checkpoint.seq === checkpointSeq),
+    policy.checkpoints.at(-1)?.seq === checkpointSeq,
   );
 
   if (!candidates.length) {
     throw new Error(
-      `Frozen Q2 workload has no checkpoint exactly ${fixedAge} events behind terminal at lifetime ${manifestContent.event_count}. ` +
+      `Frozen Q2 workload has no policy whose latest checkpoint is exactly ${fixedAge} events behind terminal at lifetime ${manifestContent.event_count}. ` +
       'Trial 002 refuses to substitute a different checkpoint age.',
     );
   }
@@ -432,8 +432,8 @@ if (flag('--self-test')) {
     target_evaluation: targetEvaluation,
     limitations: [
       'CI timings are runner-specific and are not stable production-hardware latency claims.',
-      'Trial 002 reuses the frozen Q2 Trial 001 workload/generator semantics and selects an existing checkpoint that lands exactly at the preregistered fixed age.',
-      'The frozen Trial 001 percentage policies provide exact 10,000-event checkpoints for the required 100K and 1M profiles; the optional 10M profile is not claimed by this implementation.',
+      'Trial 002 reuses the frozen Q2 Trial 001 workload/generator semantics and selects an existing policy whose latest checkpoint lands exactly at the preregistered fixed age.',
+      'The frozen Trial 001 percentage policies provide exact 10,000-event-old latest checkpoints for the required 100K and 1M profiles; the optional 10M profile is not claimed by this implementation.',
       'Metadata byte accounting describes files read by the algorithm and exact checkpoint candidate lengths; it is not kernel block-I/O or cache telemetry.',
       'Selective reconstruction remains an ordinary recovery path and is not a substitute for full historical audit.',
     ],
