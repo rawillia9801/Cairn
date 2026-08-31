@@ -1,45 +1,46 @@
 import { MissionHeader, PageCTA, Section } from '../components/mission-control';
 
 const timeline = [
-  ['01','Initial work begins','The system begins recording decisions, sources, outcomes and unresolved work.','What actually happened?','Do we still have the original, append-only record?'],
-  ['02','Model upgrade','A stronger cognition engine replaces the original without needing to erase the past.','What remains unresolved?','Which commitments, obligations and unfinished work still matter?'],
-  ['03','Provider migration','The system moves to new infrastructure while history and provenance must remain portable.','What can be proven?','Can important state claims still trace back to source events and artifacts?'],
-  ['04','Host move','Compute, storage or deployment environment changes underneath the system.','What survives replacement?','Which state is authoritative after the move?'],
-  ['05','Recovery event','Failure, corruption or provider loss forces the system to reconstruct and resume.','Can recovery be verified?','Can the restored system prove it resumed from valid historical state?'],
+  ['01','The work begins','The system starts recording decisions, sources, outcomes and unfinished work.','What actually happened?','Do we still have the original record?'],
+  ['02','The model changes','A stronger AI model replaces the original.','What is still unfinished?','Which commitments and tasks still matter?'],
+  ['03','The provider changes','The system moves to a different provider.','Can we still trace the past?','Can important decisions still be tied back to their sources?'],
+  ['04','The hardware changes','Compute or storage moves to a different environment.','What survived the move?','Which version of the current state should be trusted?'],
+  ['05','Something fails','A failure or damaged state forces the system to recover.','Can we trust the recovery?','Can the restored system show that it resumed from a valid record?'],
 ];
 
 export default function WhyContinuity(){
   return <main>
-    <MissionHeader eyebrow="Why Continuity" title="Memory is not continuity." description="For a short-lived chat, retrieving recent context may be enough. For an AI system expected to operate for years, it is not." telemetry={[
-      <>SESSION MEMORY · <strong>TEMPORARY</strong></>,<>VECTOR RETRIEVAL · <strong>PARTIAL</strong></>,<>AUTHORITATIVE HISTORY · <strong>REQUIRED</strong></>,<>RECOVERY · <strong>TESTABLE</strong></>
+    <MissionHeader eyebrow="Why Continuity" title="Memory is useful. Continuity is bigger." description="For a short chat, remembering recent context may be enough. For an AI system expected to work for years, it is not." telemetry={[
+      <>SESSION MEMORY · <strong>TEMPORARY</strong></>,<>RETRIEVAL · <strong>PARTIAL</strong></>,<>HISTORY · <strong>PRESERVED</strong></>,<>RECOVERY · <strong>TESTABLE</strong></>
     ]}/>
 
-    <Section eyebrow="Scenario / 01" title="Imagine an AI system that works with you for five years." description="Models improve. Providers change. Hosts move. Failures happen. Continuity asks whether the authoritative record survives all of it.">
+    <Section eyebrow="Imagine this / 01" title="An AI system works with you for five years." description="During those five years, the model changes, the provider changes, the machine changes and eventually something has to be recovered. The question is whether the system can still pick up from a trustworthy past.">
       <div className="continuity-timeline">
         {timeline.map(([n,title,text,q,a]) => <article className="timeline-stop" key={n}>
           <div className="time-node">{n}</div>
           <span>{n === '01' ? 'YEAR 1' : n === '05' ? 'YEAR 5+' : `YEAR ${n}`}</span>
           <h3>{title}</h3>
           <p>{text}</p>
-          <div className="timeline-question"><small>CONTINUITY QUESTION</small><b>{q}</b><p>{a}</p></div>
+          <div className="timeline-question"><small>KEY QUESTION</small><b>{q}</b><p>{a}</p></div>
         </article>)}
       </div>
       <div className="memory-banner">
-        <div><span>THE DIFFERENCE THAT MATTERS</span><h3>Memory can be revised. History must remain attributable.</h3></div>
-        <p>Summaries can change and models can reinterpret prior events. Cairn is aimed at preserving what happened, where a later conclusion came from, and how authoritative state can be reconstructed after change.</p>
+        <div><span>THE DIFFERENCE THAT MATTERS</span><h3>Memory can change. The original history should not.</h3></div>
+        <p>Summaries can be rewritten and a new model may interpret old events differently. Cairn is aimed at keeping the original record, the source behind important conclusions and a reliable way to rebuild the current state.</p>
       </div>
     </Section>
 
-    <Section eyebrow="Persistence vs continuity / 02" title="Existing tools solve pieces of the problem." description="Threads, vector databases, summaries and workflow checkpoints are useful. Cairn is aimed at the layer that determines what historical state is authoritative across change.">
-      <div className="architecture-panel"><div className="panel-bar"><span>CONTINUITY GAP ANALYSIS</span><b>● REVIEWED</b></div><div className="architecture-grid">
-        <article><span>THREADS</span><h3>Conversation state</h3><p>Useful for session continuity; often provider-specific.</p></article>
-        <article><span>VECTOR MEMORY</span><h3>Semantic retrieval</h3><p>Useful for recall; does not inherently preserve chronology or authority.</p></article>
-        <article><span>CHECKPOINTS</span><h3>Workflow resume</h3><p>Useful for process recovery; not necessarily cross-model historical continuity.</p></article>
-        <article><span>SUMMARIES</span><h3>Compressed interpretation</h3><p>Useful for efficiency; mutable summaries can obscure what was original.</p></article>
-        <article><span>CAIRN</span><h3>Continuity substrate</h3><p>History, provenance, checkpoints, reconstruction and transition semantics.</p></article>
-        <article><span>RESEARCH</span><h3>Measured boundary</h3><p>Behavioral continuity is tested rather than assumed.</p></article>
+    <Section eyebrow="What existing tools already do / 02" title="A lot of useful tools solve part of the problem." description="Conversation threads, vector search, summaries and workflow checkpoints all help. Cairn is focused on the missing piece: keeping a trustworthy history when the model or infrastructure changes.">
+      <div className="architecture-panel"><div className="panel-bar"><span>WHERE THE TOOLS FIT</span><b>● CONTINUITY VIEW</b></div><div className="architecture-grid">
+        <article><span>THREADS</span><h3>Keep a conversation going</h3><p>Useful inside a session or product, but often tied to one provider.</p></article>
+        <article><span>VECTOR MEMORY</span><h3>Find relevant information</h3><p>Useful for recall, but it does not automatically preserve the order of events or which record is authoritative.</p></article>
+        <article><span>CHECKPOINTS</span><h3>Restart a process</h3><p>Useful for resuming a workflow, but not necessarily for carrying years of history across a model change.</p></article>
+        <article><span>SUMMARIES</span><h3>Compress what happened</h3><p>Useful for speed, but a summary is still an interpretation of the original record.</p></article>
+        <article><span>CAIRN</span><h3>Keep the trusted history underneath</h3><p>Preserved history, linked sources, checkpoints, recovery and model transition.</p></article>
+        <article><span>RESEARCH</span><h3>Test what actually survives</h3><p>We measure the limits instead of assuming the answer.</p></article>
       </div></div>
     </Section>
-    <PageCTA title="See the architecture behind the continuity layer." href="/technology" label="Technology"/>
+
+    <PageCTA title="See the technology behind the continuity layer." href="/technology" label="Technology"/>
   </main>;
 }
