@@ -2,27 +2,31 @@ import { ArchitectureFlow, MissionHeader, PageCTA, Section } from '../components
 
 export default function Technology(){
   return <main>
-    <MissionHeader eyebrow="Technology" title="Continuity is a systems layer." description="Cairn is designed to keep historical authority, provenance, recovery and state reconstruction outside the replaceable cognition engine." telemetry={[
-      <>EVENT LEDGER · <strong>APPEND-ONLY</strong></>,<>PROVENANCE · <strong>LINKED</strong></>,<>CHECKPOINTS · <strong>VERIFIABLE</strong></>,<>MODEL TRANSITION · <strong>DECOUPLED</strong></>
+    <MissionHeader eyebrow="Technology" title="Keep the history separate from the model." description="Cairn is designed so the system's trusted history, sources and recovery process do not live only inside the AI model that happens to be running today." telemetry={[
+      <>EVENT HISTORY · <strong>APPEND-ONLY</strong></>,<>SOURCES · <strong>LINKED</strong></>,<>CHECKPOINTS · <strong>VERIFIABLE</strong></>,<>MODEL CHANGE · <strong>SUPPORTED</strong></>
     ]}/>
-    <Section eyebrow="Reference architecture / 01" title="A stable continuity substrate underneath replaceable intelligence." description="The cognition engine can change while the continuity substrate remains responsible for authoritative history and recovery semantics."><ArchitectureFlow/></Section>
-    <Section eyebrow="Core modules / 02" title="Evidence first. Derived state second." description="The system is intended to preserve original evidence independently from later model-generated interpretation.">
+
+    <Section eyebrow="How it fits together / 01" title="The model can change. The continuity layer stays with the system." description="The AI model does the thinking. Cairn keeps the history and recovery record underneath it."><ArchitectureFlow/></Section>
+
+    <Section eyebrow="Core pieces / 02" title="Keep the original record first. Build summaries and working memory on top of it." description="The point is simple: a later summary should never become the only version of what happened.">
       <div className="info-grid">{[
-        ['01','Append-only event ledger','Continuity-significant events record predecessor linkage, sources, actor/process, time, schema version and integrity metadata.'],
-        ['02','Content-addressed originals','Original artifacts remain independently addressable so derived summaries never become the only record.'],
-        ['03','Provenance-linked memory','Episodic, semantic, working and reflective memory can coexist without losing evidence behind later conclusions.'],
-        ['04','Cryptographic checkpoints','Recovery points can be validated before resume, migration, rollback or restoration.'],
-        ['05','State reconstruction','Current authoritative state is derived from verified historical evidence rather than assumed from mutable summaries.'],
-        ['06','Transition protocol','A replacement cognition engine rehydrates prior commitments and state without being required to imitate old outputs.'],
+        ['01','Append-only event history','Important events are added in order with links to what came before, where the information came from and integrity data that helps detect tampering.'],
+        ['02','Original files stay addressable','Original documents and artifacts remain available so a later summary does not replace the source material.'],
+        ['03','Memory linked back to evidence','Working memory, summaries and conclusions can point back to the records that support them.'],
+        ['04','Verified checkpoints','Recovery points can be checked before the system resumes after a move, failure or restore.'],
+        ['05','State reconstruction','The current working state is rebuilt from verified history instead of being trusted just because a summary says it is correct.'],
+        ['06','Model transition','A replacement model can recover prior state and unfinished commitments without having to imitate the old model word for word.'],
       ].map(([n,t,p])=><article className="info-card" key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}</div>
     </Section>
-    <Section eyebrow="What Cairn is not / 03" title="Not another memory wrapper." description="Cairn sits below the model-facing memory experience and focuses on historical authority, recovery and migration.">
+
+    <Section eyebrow="What Cairn is not / 03" title="This is more than adding memory to a chatbot." description="Memory tools are useful. Cairn is focused on what happens when the model changes, the system moves or recovery has to be trusted.">
       <div className="info-grid">{[
-        ['A','Not a personality prompt','Continuity is not simulated by telling a replacement model who it is.'],
-        ['B','Not just vector memory','Retrieval is useful, but retrieval alone does not establish authoritative history.'],
-        ['C','Not just workflow checkpointing','Resuming a process is different from continuity across cognition-engine replacement.'],
+        ['A','Not a personality prompt','Telling a new model who it is does not prove that it recovered the old system correctly.'],
+        ['B','Not just vector memory','Search and retrieval help with recall, but they do not automatically preserve the order of events or which record should be trusted.'],
+        ['C','Not just workflow checkpointing','Restarting a process is different from carrying years of history across a model replacement.'],
       ].map(([n,t,p])=><article className="info-card" key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}</div>
     </Section>
-    <PageCTA title="See how the architecture is being tested." href="/research" label="Research program"/>
+
+    <PageCTA title="See what parts of this architecture have already been tested." href="/research" label="Research"/>
   </main>;
 }
