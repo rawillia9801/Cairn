@@ -1,0 +1,50 @@
+{
+  "fixtureVersion": "cairn.fixture.continuity-ledger.v1",
+  "purpose": "Language-independent deterministic test vector for Cairn event canonicalization, SHA-256 sealing, and predecessor linkage.",
+  "events": [
+    {
+      "schemaVersion": "cairn.event.v1",
+      "id": "evt-0001",
+      "sequence": 1,
+      "recordedAt": "2026-08-29T22:00:00.000Z",
+      "eventType": "continuity.test.genesis",
+      "actor": {
+        "id": "phase1-test-harness",
+        "kind": "system"
+      },
+      "source": {
+        "system": "cairn-phase1-fixture"
+      },
+      "predecessorHash": null,
+      "artifacts": [],
+      "payload": {
+        "assertion": "original evidence remains immutable",
+        "revision": 1
+      },
+      "hashAlgorithm": "sha256",
+      "eventHash": "18aa21f022db02e674644dc35dca504f6cd636c558fb5e3904b6fd6e7736a681"
+    },
+    {
+      "schemaVersion": "cairn.event.v1",
+      "id": "evt-0002",
+      "sequence": 2,
+      "recordedAt": "2026-08-29T22:00:01.000Z",
+      "eventType": "continuity.test.revision",
+      "actor": {
+        "id": "phase1-test-harness",
+        "kind": "system"
+      },
+      "source": {
+        "system": "cairn-phase1-fixture"
+      },
+      "predecessorHash": "18aa21f022db02e674644dc35dca504f6cd636c558fb5e3904b6fd6e7736a681",
+      "artifacts": [],
+      "payload": {
+        "assertion": "a later conclusion may change without rewriting the original record",
+        "revision": 2
+      },
+      "hashAlgorithm": "sha256",
+      "eventHash": "d52251c84ac15cdfc9efc4df30021741bf46016698ad511d54ae569865c32011"
+    }
+  ]
+}
