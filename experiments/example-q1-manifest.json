@@ -15,7 +15,8 @@
   "dataset": {
     "synthetic": true,
     "version": "example-v1",
-    "hash": "replace-with-content-hash-before-run"
+    "path": "experiments/data/q1-example-dataset.json",
+    "hash": "sha256:3db896482bcff1d1f4167f551f62799296b89dec35700c0009e33dd3f879569b"
   },
   "metrics": [
     "state_assertion_recovery",
