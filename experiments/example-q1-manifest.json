@@ -1,0 +1,31 @@
+{
+  "experimentId": "q1-example-cross-model-001",
+  "question": "Q1",
+  "authoritative": false,
+  "disposable": true,
+  "initializesCairn": false,
+  "createsIdentity": false,
+  "createsContinuityState": false,
+  "createsMemory": false,
+  "createsCommitments": false,
+  "createsCheckpoints": false,
+  "createsGenesisState": false,
+  "createsProvenanceState": false,
+  "createsCommitGateState": false,
+  "dataset": {
+    "synthetic": true,
+    "version": "example-v1",
+    "path": "experiments/data/q1-example-dataset.json",
+    "hash": "sha256:3db896482bcff1d1f4167f551f62799296b89dec35700c0009e33dd3f879569b"
+  },
+  "metrics": [
+    "state_assertion_recovery",
+    "commitment_recovery",
+    "provenance_fidelity",
+    "historical_integrity",
+    "interpretation_divergence"
+  ],
+  "outputs": [
+    "artifacts/q1-example-cross-model-001/"
+  ]
+}

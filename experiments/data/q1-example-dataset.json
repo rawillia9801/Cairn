@@ -1,0 +1,25 @@
+{
+  "datasetId": "q1-example-synthetic-v1",
+  "synthetic": true,
+  "description": "Disposable pre-genesis benchmark fixture for validating Cairn research harness plumbing only.",
+  "events": [
+    {
+      "id": "evt-001",
+      "type": "state_assertion",
+      "fact": "project_alpha_status=active",
+      "source": "synthetic-source-a"
+    },
+    {
+      "id": "evt-002",
+      "type": "commitment",
+      "fact": "review_due=2030-01-15",
+      "source": "synthetic-source-b"
+    },
+    {
+      "id": "evt-003",
+      "type": "correction",
+      "fact": "append clarification without mutating evt-001",
+      "source": "synthetic-source-c"
+    }
+  ]
+}
